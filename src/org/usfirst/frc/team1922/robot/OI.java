@@ -60,7 +60,8 @@ public class OI {
 	
 	public OI() {			
 		//kTrigger = new JoystickButton(rightStick, ButtonType.kTrigger);
-		leftTrigger.whenPressed(new HighGear_Command());
+		//leftTrigger.whenPressed(new HighGear_Command());
+		//leftTrigger.whenReleased(new TankDrive_Command());
 	}
 	
 	

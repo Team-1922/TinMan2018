@@ -27,13 +27,14 @@ public class HighGear_Command extends Command{
 		@Override
 		protected void execute() {
 			SmartDashboard.putString("High Gear 3", "Execute");
-			Robot.m_driveTrain.highDrive(Robot.m_oi.getRightStick());
+			Robot.m_driveTrain.highDrive(Robot.m_oi.getRightStick(), Robot.m_oi.getLeftStick());
 		}
 
 		// Make this return true when this Command no longer needs to run execute()
 		@Override
 		protected boolean isFinished() {
-			return Robot.m_oi.leftTriggerIsPressed();
+			return !Robot.m_oi.leftTriggerIsPressed();
+			//return false;
 		}
 
 		// Called once after isFinished returns true
