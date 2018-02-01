@@ -37,7 +37,6 @@ public class DriveTrain_Subsystem extends Subsystem{
 	}
 	
 	public void lowDrive(Joystick leftStick, Joystick rightStick) {
-		lowGear();
 		SmartDashboard.putString("Drive Train", "lowDrive");
 		double left = rightStick.getY();
 		double right = rightStick.getY();
@@ -48,19 +47,7 @@ public class DriveTrain_Subsystem extends Subsystem{
 		rearRight.set(right);
 		frontRight.set(right);
 	}
-	public void highDrive(Joystick leftStick, Joystick rightStick) {
-		highGear();
-		SmartDashboard.putString("Drive Train", "highDrive");
-		double left = rightStick.getY();
-		double right = rightStick.getY();
-		SmartDashboard.putString("highDrive", "Running");
-		
-		rearLeft.set(left);
-		frontLeft.set(left);
-		rearRight.set(right);
-		frontRight.set(right);
-	}
-	/**
+	
 	public void highDrive(Joystick rightStick) {
 		SmartDashboard.putString("Drive Train", "highDrive");
 		double left = rightStick.getY() + rightStick.getX();
@@ -71,7 +58,6 @@ public class DriveTrain_Subsystem extends Subsystem{
 		rearRight.set(right);
 		frontRight.set(right);
 	}
-	**/
 	
 	public void stop() {
 		rearLeft.set(0);

@@ -27,12 +27,7 @@ public class TankDrive_Command extends Command{
 	@Override
 	protected void execute() {
 		SmartDashboard.putString("Tank Drive 3", "execute");
-		if (Robot.m_oi.leftTriggerIsPressed()) {
-			Robot.m_driveTrain.highDrive(Robot.m_oi.getLeftStick(), Robot.m_oi.getRightStick());
-		}
-		else {
-			Robot.m_driveTrain.lowDrive(Robot.m_oi.getLeftStick(), Robot.m_oi.getRightStick());
-		}
+		Robot.m_driveTrain.lowDrive(Robot.m_oi.getLeftStick(), Robot.m_oi.getRightStick());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
