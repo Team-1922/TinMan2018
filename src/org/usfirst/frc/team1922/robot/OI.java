@@ -56,11 +56,14 @@ public class OI {
 	private Joystick m_rightStick = new Joystick(0);
 	private Joystick m_operator = new Joystick(2);
 	private Button leftTrigger = new JoystickButton(getLeftStick(), 1);
-
+	private Button operatorTrigger = new JoystickButton(getOperator(), 1);
+	private Button operatorSecond = new JoystickButton(getOperator(), 2);
+	
 	
 	public OI() {			
 		//kTrigger = new JoystickButton(rightStick, ButtonType.kTrigger);
-		leftTrigger.whenPressed(new HighGear_Command());
+		//leftTrigger.whenPressed(new HighGear_Command());
+		//leftTrigger.whenReleased(new TankDrive_Command());
 	}
 	
 	
@@ -76,8 +79,12 @@ public class OI {
 	public boolean leftTriggerIsPressed() {
 		return leftTrigger.get();
 	}
-
-	
+	public boolean operatorTriggerIsPressed() {
+		return operatorTrigger.get();
+	}
+	public boolean operatorSecondIsPressed() {
+		return operatorTrigger.get();
+	}
 	
 	
 }

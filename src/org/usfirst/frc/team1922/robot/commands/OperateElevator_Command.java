@@ -2,36 +2,32 @@ package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
 
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TankDrive_Command extends Command{
+public class OperateElevator_Command extends Command{
 
-	public TankDrive_Command() {
-		super();
-		SmartDashboard.putString("Tank Drive", "Created");
-		requires(Robot.m_driveTrain);
+	public OperateElevator_Command() {
+	
 	}
 	
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.m_driveTrain.lowGear();
-		SmartDashboard.putString("Tank Drive 2", "Initialize");
+		
 	}
 	
-	
-
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		SmartDashboard.putString("Tank Drive 3", "execute");
-		if (Robot.m_oi.leftTriggerIsPressed()) {
-			Robot.m_driveTrain.highDrive(Robot.m_oi.getRightStick());
+		if(Robot.m_oi.operatorTriggerIsPressed()){
+			Robot.m_elevator.up();
+		}
+		else if(Robot.m_oi.operatorSecondIsPressed()) {
+			Robot.m_elevator.down();
 		}
 		else {
-			Robot.m_driveTrain.lowDrive(Robot.m_oi.getLeftStick(), Robot.m_oi.getRightStick());
+			Robot.m_elevator.brake();
 		}
 	}
 
@@ -44,7 +40,7 @@ public class TankDrive_Command extends Command{
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_driveTrain.stop();
+		Robot.m_elevator.brake();
 	}
 
 	// Called when another command which requires one or more of the same
@@ -53,5 +49,5 @@ public class TankDrive_Command extends Command{
 	protected void interrupted() {
 		end();
 	}
-}
 
+}

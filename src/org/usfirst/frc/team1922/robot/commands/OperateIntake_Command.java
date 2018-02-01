@@ -2,23 +2,20 @@ package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
 
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TankDrive_Command extends Command{
-
-	public TankDrive_Command() {
+public class OperateIntake_Command extends Command{
+	public  OperateIntake_Command() {
 		super();
-		SmartDashboard.putString("Tank Drive", "Created");
-		requires(Robot.m_driveTrain);
+		SmartDashboard.putString("Intake", "Created");
+		requires(Robot.m_intake);
 	}
 	
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		Robot.m_driveTrain.lowGear();
-		SmartDashboard.putString("Tank Drive 2", "Initialize");
+		//SmartDashboard.putString("Intake", "Initialize");
 	}
 	
 	
@@ -26,13 +23,8 @@ public class TankDrive_Command extends Command{
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		SmartDashboard.putString("Tank Drive 3", "execute");
-		if (Robot.m_oi.leftTriggerIsPressed()) {
-			Robot.m_driveTrain.highDrive(Robot.m_oi.getRightStick());
-		}
-		else {
-			Robot.m_driveTrain.lowDrive(Robot.m_oi.getLeftStick(), Robot.m_oi.getRightStick());
-		}
+		SmartDashboard.putString("Intake", "execute");
+		Robot.m_intake.run(Robot.m_oi.getOperator());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -54,4 +46,3 @@ public class TankDrive_Command extends Command{
 		end();
 	}
 }
-
