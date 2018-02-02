@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake_Subsystem extends Subsystem{
 
-	private WPI_TalonSRX leftIntake = new WPI_TalonSRX(RobotMap.INTAKELEFT);
-	private WPI_TalonSRX rightIntake = new WPI_TalonSRX(RobotMap.INTAKERIGHT);
+//	private WPI_TalonSRX leftIntake = new WPI_TalonSRX(RobotMap.INTAKELEFT);
+//	private WPI_TalonSRX rightIntake = new WPI_TalonSRX(RobotMap.INTAKERIGHT);
 
 	
 	public Intake_Subsystem()
@@ -25,18 +25,18 @@ public class Intake_Subsystem extends Subsystem{
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new OperateIntake_Command());
+		//setDefaultCommand(new OperateIntake_Command());
 	}
 	
 	public void run(Joystick operator) {
 		SmartDashboard.putString("Intake Subsystem", "Running");
-		leftIntake.set(operator.getY());
-		rightIntake.set(operator.getY());
+//		leftIntake.set(operator.getY());
+//		rightIntake.set(operator.getY());
 
 	}
 
 	public void stop() {
-		rightIntake.set(0);
-		leftIntake.set(0);
+//		rightIntake.set(0);
+//		leftIntake.set(0);
 	}
 }

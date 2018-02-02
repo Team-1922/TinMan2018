@@ -14,13 +14,13 @@ public class Elevator_Subsystem extends Subsystem{
 	
 	public Elevator_Subsystem() {
 		super();
-		elevator = new WPI_TalonSRX(RobotMap.ELEVATOR);
+//		elevator = new WPI_TalonSRX(RobotMap.ELEVATOR);
 	}
 	
 	
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new OperateElevator_Command());
+		//setDefaultCommand(new OperateElevator_Command());
 	}
 	
 	public void up(){

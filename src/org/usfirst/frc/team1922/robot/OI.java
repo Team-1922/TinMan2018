@@ -52,15 +52,21 @@ public class OI {
 	button.whenReleased(new ExampleCommand());
 	**/
 
-	private Joystick m_leftStick = new Joystick(1);
-	private Joystick m_rightStick = new Joystick(0);
-	private Joystick m_operator = new Joystick(2);
-	private Button leftTrigger = new JoystickButton(getLeftStick(), 1);
-	private Button operatorTrigger = new JoystickButton(getOperator(), 1);
-	private Button operatorSecond = new JoystickButton(getOperator(), 2);
+	private Joystick m_leftStick;
+	private Joystick m_rightStick;
+	private Joystick m_operator;
+	private Button leftTrigger;
+	private Button operatorTrigger;
+	private Button operatorSecond;
 	
 	
 	public OI() {			
+		m_leftStick = new Joystick(1);
+		m_rightStick = new Joystick(0);
+		m_operator = new Joystick(2);
+		leftTrigger = new JoystickButton(getLeftStick(), 1);
+		operatorTrigger = new JoystickButton(getOperator(), 1);
+		operatorSecond = new JoystickButton(getOperator(), 2);
 		//kTrigger = new JoystickButton(rightStick, ButtonType.kTrigger);
 		//leftTrigger.whenPressed(new HighGear_Command());
 		//leftTrigger.whenReleased(new TankDrive_Command());

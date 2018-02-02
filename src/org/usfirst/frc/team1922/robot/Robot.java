@@ -43,8 +43,8 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		m_driveTrain = new DriveTrain_Subsystem();
-		m_intake = new Intake_Subsystem();
-		m_elevator = new Elevator_Subsystem();
+		//m_intake = new Intake_Subsystem();
+		//m_elevator = new Elevator_Subsystem();
 		//m_chooser.addDefault("Default Auto", new TankDrive_Command());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);

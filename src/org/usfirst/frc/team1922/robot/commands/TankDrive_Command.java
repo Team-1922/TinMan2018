@@ -38,12 +38,14 @@ public class TankDrive_Command extends Command{
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
+		SmartDashboard.putString("IsFinishedBool", "True");
 		return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		SmartDashboard.putString("Ended", "True");
 		Robot.m_driveTrain.stop();
 	}
 
@@ -51,6 +53,7 @@ public class TankDrive_Command extends Command{
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		SmartDashboard.putString("Interruped", "True");
 		end();
 	}
 }

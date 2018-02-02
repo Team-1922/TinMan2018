@@ -28,13 +28,13 @@ public class RobotMap {
 	//Values are just guesses
 	public static final int REARLEFT = 2;
 	public static final int FRONTLEFT = 1;
-	public static final int REARRIGHT = 3;
-	public static final int FRONTRIGHT = 4;
+	//public static final int REARRIGHT = 3;
+	//public static final int FRONTRIGHT = 4;
 	
 	public static final int GEARSHIFT = 0;
 	
-	public static final int INTAKERIGHT = 5;
-	public static final int INTAKELEFT = 6;
+	//public static final int INTAKERIGHT = 5;
+	//public static final int INTAKELEFT = 6;
 	
-	public static final int ELEVATOR = 7;
+	//public static final int ELEVATOR = 7;
 }

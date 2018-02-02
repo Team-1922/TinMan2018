@@ -14,8 +14,8 @@ public class DriveTrain_Subsystem extends Subsystem{
 
 	private WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.REARLEFT);
 	private WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.FRONTLEFT);
-	private WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.REARRIGHT);
-	private WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.FRONTRIGHT);
+	//private WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.REARRIGHT);
+	//private WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.FRONTRIGHT);
 	private Solenoid gearShift = new Solenoid(RobotMap.GEARSHIFT);
 	
 	public DriveTrain_Subsystem()
@@ -45,8 +45,8 @@ public class DriveTrain_Subsystem extends Subsystem{
 		
 		rearLeft.set(left);
 		frontLeft.set(left);
-		rearRight.set(right);
-		frontRight.set(right);
+//		rearRight.set(right);
+//		frontRight.set(right);
 	}
 	/**
 	public void highDrive(Joystick leftStick, Joystick rightStick) {
@@ -70,15 +70,15 @@ public class DriveTrain_Subsystem extends Subsystem{
 		
 		rearLeft.set(left);
 		frontLeft.set(left);
-		rearRight.set(right);
-		frontRight.set(right);
+//		rearRight.set(right);
+//		frontRight.set(right);
 	}
 	
 	public void stop() {
 		rearLeft.set(0);
 		frontLeft.set(0);
-		rearRight.set(0);
-		frontRight.set(0);
+//		rearRight.set(0);
+//		frontRight.set(0);
 	}
 
 }
