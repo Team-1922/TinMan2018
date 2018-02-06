@@ -10,7 +10,7 @@ public class TankDrive_Command extends Command{
 
 	public TankDrive_Command() {
 		super();
-		SmartDashboard.putString("Tank Drive", "Created");
+		SmartDashboard.putString("TankDrive_Command", "Created");
 		requires(Robot.m_driveTrain);
 	}
 	
@@ -18,7 +18,7 @@ public class TankDrive_Command extends Command{
 	@Override
 	protected void initialize() {
 		Robot.m_driveTrain.lowGear();
-		SmartDashboard.putString("Tank Drive 2", "Initialize");
+		SmartDashboard.putString("TankDrive_Command initialize", "Initialize");
 	}
 	
 	
@@ -26,7 +26,7 @@ public class TankDrive_Command extends Command{
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		SmartDashboard.putString("Tank Drive 3", "execute");
+		SmartDashboard.putString("TankDrive_Command execute", "execute");
 		if (Robot.m_oi.leftTriggerIsPressed()) {
 			Robot.m_driveTrain.highDrive(Robot.m_oi.getRightStick());
 		}
@@ -38,14 +38,13 @@ public class TankDrive_Command extends Command{
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		SmartDashboard.putString("IsFinishedBool", "True");
 		return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		SmartDashboard.putString("Ended", "True");
+		SmartDashboard.putString("TankDrive_Command end", "ended");
 		Robot.m_driveTrain.stop();
 	}
 
@@ -53,7 +52,7 @@ public class TankDrive_Command extends Command{
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		SmartDashboard.putString("Interruped", "True");
+		SmartDashboard.putString("TankDrive_Command interrupted", "interrupted");
 		end();
 	}
 }

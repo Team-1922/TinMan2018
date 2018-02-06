@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team1922.robot.subsystems;
 
 import org.usfirst.frc.team1922.robot.RobotMap;
@@ -14,14 +15,14 @@ public class DriveTrain_Subsystem extends Subsystem{
 
 	private WPI_TalonSRX rearLeft = new WPI_TalonSRX(RobotMap.REARLEFT);
 	private WPI_TalonSRX frontLeft = new WPI_TalonSRX(RobotMap.FRONTLEFT);
-	//private WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.REARRIGHT);
-	//private WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.FRONTRIGHT);
+	private WPI_TalonSRX rearRight = new WPI_TalonSRX(RobotMap.REARRIGHT);
+	private WPI_TalonSRX frontRight = new WPI_TalonSRX(RobotMap.FRONTRIGHT);
 	private Solenoid gearShift = new Solenoid(RobotMap.GEARSHIFT);
 	
 	public DriveTrain_Subsystem()
 	{
 		super();
-		SmartDashboard.putString("Drive Train", "Created");
+		SmartDashboard.putString("DriveTrain_Subsytem", "Created");
 	}
 	
 	public void lowGear(){
@@ -33,52 +34,40 @@ public class DriveTrain_Subsystem extends Subsystem{
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new TankDrive_Command());
-		SmartDashboard.putString("Drive Train", "setDefault_Command");
+		SmartDashboard.putString("DriveTrain_Subsytem default", "default set: TankDrive_Command");
 	}
 	
 	public void lowDrive(Joystick leftStick, Joystick rightStick) {
 		lowGear();
-		SmartDashboard.putString("Drive Train", "lowDrive");
 		double left = rightStick.getY();
-		double right = rightStick.getY();
-		SmartDashboard.putString("lowDrive", "TEST");
-		
-		rearLeft.set(left);
-		frontLeft.set(left);
-//		rearRight.set(right);
-//		frontRight.set(right);
-	}
-	/**
-	public void highDrive(Joystick leftStick, Joystick rightStick) {
-		highGear();
-		SmartDashboard.putString("Drive Train", "highDrive");
-		double left = rightStick.getY();
-		double right = rightStick.getY();
-		SmartDashboard.putString("highDrive", "Running");
+		double right = leftStick.getY();
 		
 		rearLeft.set(left);
 		frontLeft.set(left);
 		rearRight.set(right);
 		frontRight.set(right);
+		SmartDashboard.putString("DriveTrain_Subsytem mode", "lowDrive");
 	}
-	**/
+
 	public void highDrive(Joystick rightStick) {
 		highGear();
-		SmartDashboard.putString("Drive Train", "highDrive");
 		double left = rightStick.getY() + rightStick.getX();
 		double right = rightStick.getY() - rightStick.getX();
 		
 		rearLeft.set(left);
 		frontLeft.set(left);
-//		rearRight.set(right);
-//		frontRight.set(right);
+		rearRight.set(right);
+		frontRight.set(right);
+		SmartDashboard.putString("DriveTrain_Subsytem mode", "highDrive");
 	}
 	
 	public void stop() {
 		rearLeft.set(0);
 		frontLeft.set(0);
-//		rearRight.set(0);
-//		frontRight.set(0);
+		rearRight.set(0);
+		frontRight.set(0);
+		SmartDashboard.putString("DriveTrain_Subsytem stop", "ran");
 	}
 
 }
+

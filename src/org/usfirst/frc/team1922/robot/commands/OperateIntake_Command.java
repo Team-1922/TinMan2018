@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
@@ -8,14 +9,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OperateIntake_Command extends Command{
 	public  OperateIntake_Command() {
 		super();
-		SmartDashboard.putString("Intake", "Created");
+		
 		requires(Robot.m_intake);
+		
+		SmartDashboard.putString("OperateIntake_Command", "Created");
 	}
 	
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		//SmartDashboard.putString("Intake", "Initialize");
+		SmartDashboard.putString("OperateIntake_Command", "Initialized");
 	}
 	
 	
@@ -23,8 +26,9 @@ public class OperateIntake_Command extends Command{
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		SmartDashboard.putString("Intake", "execute");
 		Robot.m_intake.run(Robot.m_oi.getOperator());
+		SmartDashboard.putString("OperateIntake_Command execute", "executed");
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -36,7 +40,9 @@ public class OperateIntake_Command extends Command{
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.m_driveTrain.stop();
+		Robot.m_intake.stop();
+		SmartDashboard.putString("OperateIntake_Command", "ended");
+
 	}
 
 	// Called when another command which requires one or more of the same
@@ -44,5 +50,8 @@ public class OperateIntake_Command extends Command{
 	@Override
 	protected void interrupted() {
 		end();
+		SmartDashboard.putString("OperateIntake_Command interrupted", "true");
+
 	}
 }
+

@@ -70,6 +70,8 @@ public class OI {
 		//kTrigger = new JoystickButton(rightStick, ButtonType.kTrigger);
 		//leftTrigger.whenPressed(new HighGear_Command());
 		//leftTrigger.whenReleased(new TankDrive_Command());
+		
+		operatorTrigger.whenPressed(new RaiseToScale_Command());
 	}
 	
 	
@@ -89,7 +91,7 @@ public class OI {
 		return operatorTrigger.get();
 	}
 	public boolean operatorSecondIsPressed() {
-		return operatorTrigger.get();
+		return operatorSecond.get();
 	}
 	
 	

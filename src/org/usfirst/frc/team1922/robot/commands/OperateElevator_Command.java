@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
@@ -8,7 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OperateElevator_Command extends Command{
 
 	public OperateElevator_Command() {
-	
+		super();
+		requires(Robot.m_elevator);
+		SmartDashboard.putString("OperateElevator_Command", "Created");
 	}
 	
 	// Called just before this Command runs the first time
@@ -29,6 +32,7 @@ public class OperateElevator_Command extends Command{
 		else {
 			Robot.m_elevator.brake();
 		}
+		Robot.m_elevator.readEncoder();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
