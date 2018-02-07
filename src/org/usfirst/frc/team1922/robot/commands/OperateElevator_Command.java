@@ -23,15 +23,19 @@ public class OperateElevator_Command extends Command{
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if(Robot.m_oi.operatorTriggerIsPressed()){
-			Robot.m_elevator.up();
-		}
-		else if(Robot.m_oi.operatorSecondIsPressed()) {
-			Robot.m_elevator.down();
-		}
-		else {
-			Robot.m_elevator.brake();
-		}
+		
+			if(Robot.m_oi.operatorTriggerIsPressed()){
+				Robot.m_elevator.toScale();
+			}
+			else if(Robot.m_oi.operatorSecondIsPressed()) {
+				Robot.m_elevator.toSwitch();
+			}
+			else if(Robot.m_oi.operatorThirdIsPressed()) {
+				Robot.m_elevator.toBottom();
+			}
+			else {
+				Robot.m_elevator.stop();
+			}
 		Robot.m_elevator.readEncoder();
 	}
 

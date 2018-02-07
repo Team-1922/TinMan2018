@@ -18,55 +18,37 @@ public class Elevator_Subsystem extends Subsystem{
 		super();
 		elevator = new WPI_TalonSRX(RobotMap.ELEVATOR);
 		SmartDashboard.putString("Elevator_Subsytem", "created");
+		elevator.setSelectedSensorPosition(0, 0, 10);
+		elevator.configForwardSoftLimitEnable(true, 10);
+		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 10);
+		elevator.configReverseSoftLimitEnable(true, 10);
+		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 10);
 	}
 	
 	
 	@Override
-	protected void initDefaultCommand() {
-		//setDefaultCommand(new OperateElevator_Command());
-	}
+	protected void initDefaultCommand() {}
 	
-	public void up(){
-		elevator.set(.75);
-		SmartDashboard.putString("ElevatorSubsytem mode", "up");
-	}
-	public void up(double in) {
+	public void set(double in) {
 		elevator.set(in);
-	}
-	public void down() {
-		elevator.set(-.75);
-		SmartDashboard.putString("ElevatorSubsytem mode", "down");
-	}
-	public void brake() {
-		elevator.set(0);
-		SmartDashboard.putString("ElevatorSubsytem mode", "brake");
-	}
-	
-	public void setScale(){
-		
-	}
-	public void setSwitch(){
-	
-	}
-	public void setCollect() {
-		
 	}
 	
 	public void readEncoder(){
 		String value = "" + elevator.get();
-		SmartDashboard.putString("Elevator Encoder Get:", value);
-		
+		int i = elevator.getSensorCollection().getQuadraturePosition();
+		SmartDashboard.putNumber("encoder get:", (double)i);
+		//4,096 pulses per rotation
 	}
-
-
-	public boolean isFlush() {
-		if (elevator.get() <= .05 && elevator.get() >= -.05) {
+	
+	public boolean isTop() {
+		if (elevator.getSensorCollection().getQuadraturePosition() >= RobotMap.ELEVATOR_SCALE_HEIGHT) {
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
-
-
+	
 	public void stop() {
 		elevator.set(0);
 	}

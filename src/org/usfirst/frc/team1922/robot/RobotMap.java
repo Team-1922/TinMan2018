@@ -37,4 +37,8 @@ public class RobotMap {
 	public static final int INTAKELEFT = 7;
 	
 	public static final int ELEVATOR = 2;
+	public static final int ELEVATOR_SCALE_HEIGHT = 150000;	//150,000
+	public static final int ELEVATOR_BOTTOM = 2000;
+	public static final int ELEVATOR_SWITCH_HEIGHT = 80000; //80,000
+	
 }

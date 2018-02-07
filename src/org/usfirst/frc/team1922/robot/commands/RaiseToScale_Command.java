@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RaiseToScale_Command extends Command{
 
 	public RaiseToScale_Command() {
-		super(1);
+		super();
 		requires(Robot.m_elevator);
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.m_elevator.up(.55);
+		Robot.m_elevator.set(.6);
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class RaiseToScale_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		return Robot.m_elevator.isFlush();
+		return !Robot.m_elevator.isTop();
 	}
 	
 	@Override 
