@@ -8,29 +8,12 @@ public class Deposit_Command extends Command{
 
 	@Override
 	protected void initialize() {
-		setTimeout(4);
 		Robot.m_intake.set(.55);
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return isTimedOut();
+		return false;
 	}
-	
-	@Override
-	protected void execute() {
-		
-	}
-	
-	@Override
-	protected void end() {
-		Robot.m_intake.stop();
-	}
-	
-	@Override
-	protected void interrupted() {
-		end();
-	}
-
 	
 }
