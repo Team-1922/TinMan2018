@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1922.robot.subsystems;
 
 import org.usfirst.frc.team1922.robot.RobotMap;
@@ -31,6 +30,7 @@ public class DriveTrain_Subsystem extends Subsystem{
 	public void highGear(){
 		gearShift.set(true);
 	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new TankDrive_Command());
@@ -69,5 +69,15 @@ public class DriveTrain_Subsystem extends Subsystem{
 		SmartDashboard.putString("DriveTrain_Subsytem stop", "ran");
 	}
 
-}
+	public int getFrontRightPos() {
+		return frontRight.getSensorCollection().getQuadraturePosition();
+	}
 
+	public void drive(double left, double right) {
+		rearLeft.set(left);
+		frontLeft.set(left);
+		rearRight.set(right);
+		frontRight.set(right);
+		SmartDashboard.putString("DriveTrain_Subsytem mode", "drive" + left + " / " + right);
+	}
+}

@@ -40,7 +40,9 @@ public class OI {
 		operatorSecond = new JoystickButton(getOperator(), 2);
 		operatorThird = new JoystickButton(getOperator(), 3);
 
-		operatorTrigger.whenPressed(new RaiseToScale_Command());
+		operatorTrigger.whenPressed(new ElevateToScale_Command());
+		operatorSecond.whenPressed(new ElevateToSwitch_Command());
+		operatorThird.whenPressed(new ElevateToGround_Command());
 	}
 	
 	

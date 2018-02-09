@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
@@ -54,4 +53,3 @@ public class OperateIntake_Command extends Command{
 
 	}
 }
-

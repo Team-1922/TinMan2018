@@ -7,25 +7,10 @@
 
 package org.usfirst.frc.team1922.robot;
 
-/**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
- * to a variable name. This provides flexibility changing wiring, makes checking
- * the wiring easier and significantly reduces the number of magic numbers
- * floating around.
- */
 public class RobotMap {
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
 
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
 	
-	
-	//Values are just guesses
+	//Motor IDs
 	public static final int REARLEFT = 6;
 	public static final int FRONTLEFT = 1;
 	public static final int REARRIGHT = 3;
@@ -37,8 +22,12 @@ public class RobotMap {
 	public static final int INTAKELEFT = 7;
 	
 	public static final int ELEVATOR = 2;
-	public static final int ELEVATOR_SCALE_HEIGHT = 150000;	//150,000
-	public static final int ELEVATOR_BOTTOM = 2000;
-	public static final int ELEVATOR_SWITCH_HEIGHT = 80000; //80,000
+	
+	
+	//Encoder Constants 
+	public static final int ELEVATOR_SCALE_HEIGHT = 200000;
+	public static final int ELEVATOR_BOTTOM = 0;
+	public static final int ELEVATOR_SWITCH_HEIGHT = 80000; 
+	public static final int SCALE_DISTANCE = 1000000; 
 	
 }

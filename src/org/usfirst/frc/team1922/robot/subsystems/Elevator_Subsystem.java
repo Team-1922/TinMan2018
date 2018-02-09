@@ -1,8 +1,6 @@
-
 package org.usfirst.frc.team1922.robot.subsystems;
 
 import org.usfirst.frc.team1922.robot.RobotMap;
-import org.usfirst.frc.team1922.robot.commands.OperateElevator_Command;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -18,30 +16,37 @@ public class Elevator_Subsystem extends Subsystem{
 		super();
 		elevator = new WPI_TalonSRX(RobotMap.ELEVATOR);
 		SmartDashboard.putString("Elevator_Subsytem", "created");
-		elevator.setSelectedSensorPosition(0, 0, 10);
-		elevator.configForwardSoftLimitEnable(true, 10);
-		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 10);
-		elevator.configReverseSoftLimitEnable(true, 10);
-		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 10);
+		elevator.setSelectedSensorPosition(0, 0, 0);
+		elevator.configForwardSoftLimitEnable(true, 0);
+		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 0);
+		elevator.configReverseSoftLimitEnable(true, 0);
+		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 0);
 	}
 	
 	
 	@Override
 	protected void initDefaultCommand() {}
 	
-	public void set(double in) {
+	public void set(double in) { 
 		elevator.set(in);
 	}
 	
+	/**
+	 * give position of the elevator
+	 * @return elevator position in pulses
+	 */
+	public int getPosition() {
+		return elevator.getSensorCollection().getQuadraturePosition(); 
+	}
+	
 	public void readEncoder(){
-		String value = "" + elevator.get();
 		int i = elevator.getSensorCollection().getQuadraturePosition();
 		SmartDashboard.putNumber("encoder get:", (double)i);
 		//4,096 pulses per rotation
 	}
 	
 	public boolean isTop() {
-		if (elevator.getSensorCollection().getQuadraturePosition() >= RobotMap.ELEVATOR_SCALE_HEIGHT) {
+		if (getPosition() >= RobotMap.ELEVATOR_SCALE_HEIGHT) {
 			return true;
 		}
 		else {
@@ -49,8 +54,40 @@ public class Elevator_Subsystem extends Subsystem{
 		}
 	}
 	
+	public boolean isBot() {
+		if (getPosition() <= RobotMap.ELEVATOR_BOTTOM) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isBelowSwitch() {
+		if(getPosition() <= RobotMap.ELEVATOR_SWITCH_HEIGHT) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isSwitch() {
+		if(getPosition() <= RobotMap.ELEVATOR_SWITCH_HEIGHT + 1000 && getPosition() >= RobotMap.ELEVATOR_SWITCH_HEIGHT - 1000) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void stop() {
 		elevator.set(0);
 	}
-}
 
+
+	public void setSwitchLimit() {
+		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SWITCH_HEIGHT+500, 0);
+		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_SWITCH_HEIGHT-500, 0);
+	}
+	
+	public void removeSwitchLimit() {
+		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 0);
+		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 0);
+	}
+
+}
