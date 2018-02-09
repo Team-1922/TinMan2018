@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.XboxController; 
 
 
 /**
@@ -24,7 +25,8 @@ public class OI {
 
 	private Joystick m_leftStick;
 	private Joystick m_rightStick;
-	private Joystick m_operator;
+	//private Joystick m_operator;
+	private XboxController xCont;
 	private Button leftTrigger;
 	private Button operatorTrigger;
 	private Button operatorSecond;
@@ -34,7 +36,8 @@ public class OI {
 	public OI() {			
 		m_leftStick = new Joystick(1);
 		m_rightStick = new Joystick(0);
-		m_operator = new Joystick(2);
+		//m_operator = new Joystick(2);
+		xCont = new XboxController(3);
 		leftTrigger = new JoystickButton(getLeftStick(), 1);
 		operatorTrigger = new JoystickButton(getOperator(), 1);
 		operatorSecond = new JoystickButton(getOperator(), 2);
@@ -52,8 +55,8 @@ public class OI {
 	public Joystick getRightStick() {
 		return m_rightStick;
 	}
-	public Joystick getOperator() {
-		return m_operator;
+	public XboxController getOperator() {
+		return xCont;
 	}
 	public boolean leftTriggerIsPressed() {
 		return leftTrigger.get();
