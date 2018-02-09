@@ -31,7 +31,11 @@ public class Intake_Subsystem extends Subsystem{
 		leftIntake.set(operator.getY());
 		rightIntake.set(operator.getY());
 		SmartDashboard.putString("Intake_Subsystem", "Running");
-
+	}
+	
+	public void set(double in) {
+		leftIntake.set(in);
+		rightIntake.set(in);
 	}
 
 	public void stop() {
