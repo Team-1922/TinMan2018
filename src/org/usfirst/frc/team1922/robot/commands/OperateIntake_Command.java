@@ -19,8 +19,6 @@ public class OperateIntake_Command extends Command{
 	protected void initialize() {
 		SmartDashboard.putString("OperateIntake_Command", "Initialized");
 	}
-	
-	
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override

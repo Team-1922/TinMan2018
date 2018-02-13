@@ -31,7 +31,8 @@ public class ElevateToScale_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		return Robot.m_elevator.isTop();
+		//return Robot.m_elevator.isTop();
+		return false;
 	}
 	
 	@Override 

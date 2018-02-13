@@ -13,7 +13,7 @@ public class RaiseToScale_Command extends Command{
 	
 	@Override
 	protected void initialize() {
-		Robot.m_elevator.set(.6);
+		Robot.m_elevator.set(-.6);
 	}
 	
 	@Override
@@ -28,7 +28,8 @@ public class RaiseToScale_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		return !Robot.m_elevator.isTop();
+		//return !Robot.m_elevator.isTop();
+		return false;
 	}
 	
 	@Override 

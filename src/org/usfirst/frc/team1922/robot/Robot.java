@@ -35,15 +35,13 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
 	@Override
 	public void robotInit() {
 		m_driveTrain = new DriveTrain_Subsystem();
 		m_intake = new Intake_Subsystem();
 		m_elevator = new Elevator_Subsystem();
+		//m_autonomousCommand = new ScaleAuto();
+		
 		
 		m_oi = new OI();
 	}
@@ -66,16 +64,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		
 	}
 
-	/**
-	 * This function is called periodically during autonomous.
-	 */
 	@Override
 	public void autonomousPeriodic() {
-		//Scheduler.getInstance().run();
-		//SmartDashboard.putString("autonomosPeriodic", "TEST");
+		Scheduler.getInstance().run();
+		SmartDashboard.putString("driveMode", "automous");
 	}
 
 	@Override
@@ -91,6 +86,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putString("teleopPeriodic", "teleopPeriodic");
+		SmartDashboard.putString("driveMode", "teleopPeriodic");
 	}
 }

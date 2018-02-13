@@ -25,7 +25,8 @@ public class OI {
 
 	private Joystick m_leftStick;
 	private Joystick m_rightStick;
-	private XboxController xCont;
+	//private XboxController m_operator;
+	private Joystick m_operator;
 	private Button leftTrigger;
 	private Button operatorTrigger;
 	private Button operatorSecond;
@@ -35,7 +36,8 @@ public class OI {
 	public OI() {			
 		m_leftStick = new Joystick(1);
 		m_rightStick = new Joystick(0);
-		xCont = new XboxController(3);
+		//m_operator = new XboxController(3);
+		m_operator = new Joystick(2);
 		leftTrigger = new JoystickButton(getLeftStick(), 1);
 		operatorTrigger = new JoystickButton(getOperator(), 1);
 		operatorSecond = new JoystickButton(getOperator(), 2);
@@ -45,7 +47,7 @@ public class OI {
 		operatorTrigger.whenPressed(new ElevateToScale_Command());
 		operatorSecond.whenPressed(new ElevateToSwitch_Command());
 		operatorThird.whenPressed(new ElevateToGround_Command());
-		operatorFourth.whenPressed(new Deposit_Command());
+		//operatorFourth.whenPressed(new Deposit_Command());
 	}
 	
 	
@@ -55,8 +57,11 @@ public class OI {
 	public Joystick getRightStick() {
 		return m_rightStick;
 	}
-	public XboxController getOperator() {
-		return xCont;
+	//public XboxController getOperator() {
+	//	return m_operator;
+	//}
+	public Joystick getOperator() {
+		return m_operator;
 	}
 	public boolean leftTriggerIsPressed() {
 		return leftTrigger.get();
