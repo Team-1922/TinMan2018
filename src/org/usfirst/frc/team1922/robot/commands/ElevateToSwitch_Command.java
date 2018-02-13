@@ -14,13 +14,13 @@ public class ElevateToSwitch_Command extends Command{
 	}
 	
 	@Override protected void initialize() {
-		//Robot.m_elevator.setSwitchLimit();
-		//if(Robot.m_elevator.isBelowSwitch()) {
+		Robot.m_elevator.setSwitchLimit();
+		if(Robot.m_elevator.isBelowSwitch()) {
 			Robot.m_elevator.set(.25);
-		//}
-		//else {
-	//		Robot.m_elevator.set(-.25);
-	//	}
+		}
+		else {
+			Robot.m_elevator.set(-.25);
+		}
 		SmartDashboard.putNumber("Elevator Target", (double)RobotMap.ELEVATOR_SWITCH_HEIGHT);
 	}
 	
@@ -31,7 +31,7 @@ public class ElevateToSwitch_Command extends Command{
 	
 	@Override
 	protected void end() {
-		//Robot.m_elevator.removeSwitchLimit();
+		Robot.m_elevator.removeSwitchLimit();
 		Robot.m_elevator.stop();
 	}
 	
@@ -42,9 +42,9 @@ public class ElevateToSwitch_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		//if(Robot.m_elevator.isSwitch()) {
-		//	return true;
-		//}
+		if(Robot.m_elevator.isSwitch()) {
+			return true;
+		}
 		return false;
 	}
 

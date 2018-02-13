@@ -14,7 +14,7 @@ public class ElevateToGround_Command extends Command{
 	
 	@Override
 	protected void initialize() {
-		Robot.m_elevator.set(-.6);
+		Robot.m_elevator.set(-.55);
 		SmartDashboard.putNumber("Elevator Target", (double)RobotMap.ELEVATOR_BOTTOM);
 	}
 	
@@ -30,8 +30,7 @@ public class ElevateToGround_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		//return Robot.m_elevator.isBot();
-		return false;
+		return Robot.m_elevator.isBot();
 	}
 	
 	@Override 

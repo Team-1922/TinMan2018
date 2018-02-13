@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1922.robot.subsystems;
 
 import org.usfirst.frc.team1922.robot.RobotMap;
-import org.usfirst.frc.team1922.robot.commands.Operate_Elevator_Command;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -16,19 +15,17 @@ public class Elevator_Subsystem extends Subsystem{
 	public Elevator_Subsystem() {
 		super();
 		elevator = new WPI_TalonSRX(RobotMap.ELEVATOR);
-		elevator.setSelectedSensorPosition(0, 0, 10);
 		SmartDashboard.putString("Elevator_Subsytem", "created");
-		//elevator.configForwardSoftLimitEnable(true, 10);
-		//elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 10);
-		//elevator.configReverseSoftLimitEnable(true, 10);
-		//elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 10);
+		elevator.setSelectedSensorPosition(0, 0, 0);
+		elevator.configForwardSoftLimitEnable(true, 0);
+		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 0);
+		elevator.configReverseSoftLimitEnable(true, 0);
+		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 0);
 	}
 	
 	
 	@Override
-	protected void initDefaultCommand() {
-		//setDefaultCommand(new Operate_Elevator_Command());
-	}
+	protected void initDefaultCommand() {}
 	
 	public void set(double in) { 
 		elevator.set(in);
@@ -48,11 +45,6 @@ public class Elevator_Subsystem extends Subsystem{
 		//4,096 pulses per rotation
 	}
 	
-	public void stop() {
-		elevator.set(0);
-	}
-	
-	/**
 	public boolean isTop() {
 		if (getPosition() >= RobotMap.ELEVATOR_SCALE_HEIGHT) {
 			return true;
@@ -82,6 +74,11 @@ public class Elevator_Subsystem extends Subsystem{
 		}
 		return false;
 	}
+	
+	public void stop() {
+		elevator.set(0);
+	}
+
 
 	public void setSwitchLimit() {
 		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SWITCH_HEIGHT+500, 0);
@@ -92,6 +89,5 @@ public class Elevator_Subsystem extends Subsystem{
 		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 0);
 		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 0);
 	}
-**/
 
 }
