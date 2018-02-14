@@ -2,30 +2,22 @@ package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Operate_Elevator_Command extends Command{
+public class ElevatorDown_Command extends Command {
 
-	public Operate_Elevator_Command() {
+	public ElevatorDown_Command() {
 		super();
 		requires(Robot.m_elevator);
 	}
-
 	@Override
 	protected void initialize() {
-	}
-	
-	@Override
-	protected boolean isFinished() {
-		return false;
+		Robot.m_elevator.set(-.6);
+		
 	}
 	
 	@Override
 	protected void execute() {
-		double value = Robot.m_oi.getOperator().getRawAxis(3) 
-					 - Robot.m_oi.getOperator().getRawAxis(2);
-		Robot.m_elevator.set(value);
 		Robot.m_elevator.readEncoder();
 	}
 	
@@ -35,8 +27,14 @@ public class Operate_Elevator_Command extends Command{
 	}
 	
 	@Override
+	protected boolean isFinished() {
+		//return Robot.m_elevator.isTop();
+		return false;
+	}
+	
+	@Override 
 	protected void interrupted() {
 		end();
 	}
-	
+
 }
