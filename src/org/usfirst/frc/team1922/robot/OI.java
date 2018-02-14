@@ -25,29 +25,35 @@ public class OI {
 
 	private Joystick m_leftStick;
 	private Joystick m_rightStick;
-	//private XboxController m_operator;
-	private Joystick m_operator;
+	private XboxController m_operator;
+	//private Joystick m_operator;
 	private Button leftTrigger;
 	private Button operatorTrigger;
 	private Button operatorSecond;
 	private Button operatorThird;
-	private Button operatorFourth;
+	//private Button operatorFourth;
+	private Button operatorRB;
+	private Button operatorLB;
 	
 	public OI() {			
 		m_leftStick = new Joystick(1);
 		m_rightStick = new Joystick(0);
-		//m_operator = new XboxController(3);
-		m_operator = new Joystick(2);
+		m_operator = new XboxController(2);
+		//m_operator = new Joystick(2);
 		leftTrigger = new JoystickButton(getLeftStick(), 1);
 		operatorTrigger = new JoystickButton(getOperator(), 1);
 		operatorSecond = new JoystickButton(getOperator(), 2);
 		operatorThird = new JoystickButton(getOperator(), 3);
-		operatorFourth = new JoystickButton(getOperator(), 4);
+		//operatorFourth = new JoystickButton(getOperator(), 4);
+		operatorRB = new JoystickButton(getOperator(), 6);
+		operatorLB = new JoystickButton(getOperator(), 5);
 
 		operatorTrigger.whenPressed(new ElevateToScale_Command());
 		operatorSecond.whenPressed(new ElevateToSwitch_Command());
 		operatorThird.whenPressed(new ElevateToGround_Command());
 		//operatorFourth.whenPressed(new Deposit_Command());
+		operatorRB.whileHeld(new ElevatorUp_Command());
+		operatorLB.whileHeld(new ElevatorDown_Command());
 	}
 	
 	
@@ -57,12 +63,12 @@ public class OI {
 	public Joystick getRightStick() {
 		return m_rightStick;
 	}
-	//public XboxController getOperator() {
-	//	return m_operator;
-	//}
-	public Joystick getOperator() {
+	public XboxController getOperator() {
 		return m_operator;
 	}
+	//public Joystick getOperator() {
+	//	return m_operator;
+	//}
 	public boolean leftTriggerIsPressed() {
 		return leftTrigger.get();
 	}

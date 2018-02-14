@@ -22,6 +22,7 @@ public class RobotMap {
 	public static final int INTAKELEFT = 7;
 	
 	public static final int ELEVATOR = 2;
+	public static final int ELEVATOR2 = 8;
 	
 	
 	//Encoder Constants 
