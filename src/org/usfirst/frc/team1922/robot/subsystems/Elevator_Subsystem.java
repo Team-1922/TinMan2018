@@ -2,11 +2,16 @@ package org.usfirst.frc.team1922.robot.subsystems;
 
 import org.usfirst.frc.team1922.robot.RobotMap;
 //import org.usfirst.frc.team1922.robot.commands.Operate_Elevator_Command;
+import org.usfirst.frc.team1922.robot.commands.OperateElevator_Command;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,10 +19,17 @@ public class Elevator_Subsystem extends Subsystem{
 
 	private WPI_TalonSRX elevator; 
 	private WPI_TalonSRX elevator2;
+	private Solenoid deployer;
+	private Solenoid ratchet;
+	private PIDController controller;
+	int lastEncoder = 0;
+	double kp = .03;
 	
 	public Elevator_Subsystem() {
 		super();
 		elevator = new WPI_TalonSRX(RobotMap.ELEVATOR);
+		//elevator.configSelectedFeedbackSensor(FeedbackDevice., arg1, arg2)
+		elevator.setSensorPhase(true);
 		elevator.setSelectedSensorPosition(0, 0, 10);
 		elevator.configForwardSoftLimitEnable(true, 10);
 		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 10);
@@ -26,7 +38,9 @@ public class Elevator_Subsystem extends Subsystem{
 		//elevator.configReverseSoftLimitEnable(false, 10);
 		//elevator.configForwardSoftLimitEnable(false, 10);
 		
-		elevator2 = new WPI_TalonSRX(RobotMap.ELEVATOR2);
+		elevator.config_kP(1,1,10);
+		
+		//elevator2 = new WPI_TalonSRX(RobotMap.ELEVATOR2);
 		//elevator2.setSelectedSensorPosition(0, 0, 10);
 		//elevator2.configForwardSoftLimitEnable(true, 10);
 		//elevator2.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 10);
@@ -35,24 +49,45 @@ public class Elevator_Subsystem extends Subsystem{
 		//elevator2.configReverseSoftLimitEnable(false, 10);
 		//elevator2.configForwardSoftLimitEnable(false, 10);
 		
+		deployer = new Solenoid(RobotMap.DEPLOYER);
+		ratchet = new Solenoid(RobotMap.RATCHET);
+
 		SmartDashboard.putString("Elevator_Subsytem", "created");
+		
+		deploy(true);
+		//controller = new PIDController(kP, kI, kD, , elevator);
 	}
 	
+	
+	public int getLastEncoder() {
+		return lastEncoder;
+	}
+	
+	public void setRatchet(boolean value) {
+		ratchet.set(value);;
+	}
+	
+	public void zeroEncoder() {
+		elevator.setSelectedSensorPosition(0, 0, 0);
+	}
+	
+	public void deploy(boolean input){
+		deployer.set(input);
+	}
 	
 	@Override
 	protected void initDefaultCommand() {
-		//setDefaultCommand(new Operate_Elevator_Command());
+		setDefaultCommand(new OperateElevator_Command());
 	}
 		
 	public void set(double in) { 
+		//ratchet.set(false);
 		elevator.set(in);
-		elevator2.set(in);
+		//elevator2.follow(elevator);
+		//elevator2.set((elevator.get()));
+		lastEncoder = getPosition();
 	}
 	
-	/**
-	 * give position of the elevator
-	 * @return elevator position in pulses
-	 */
 	public int getPosition() {
 		return elevator.getSensorCollection().getQuadraturePosition(); 
 	}
@@ -64,11 +99,11 @@ public class Elevator_Subsystem extends Subsystem{
 	}
 	
 	public void stop() {
-		elevator.set(0);
-		elevator2.set(0);
+		elevator.set(ControlMode.Position, lastEncoder);
+		//elevator2.follow(elevator);
+		//elevator.set(0);
 	}
 	
-	/*
 	public boolean isTop() {
 		if (getPosition() >= RobotMap.ELEVATOR_SCALE_HEIGHT) {
 			return true;
@@ -108,6 +143,33 @@ public class Elevator_Subsystem extends Subsystem{
 		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 0);
 		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 0);
 	}
-*/
+
+
+	public void freeze(int last) {
+		double error = last - getPosition();
+		elevator.set(kp*error);
+		SmartDashboard.putNumber("freeze at", last);
+	}
+	
+	public void goTo(double target){
+		//elevator.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
+		//elevator.reverseSensor(false);
+		// _talon.configEncoderCodesPerRev(XXX)
+		// _talon.configPotentiometerTurns(XXX)
+		// set the peak and nominal outputs, 12V means full 
+		//elevator.configNominalOutputVoltage(+0.0f, -0.0f);
+		//elevator.configPeakOutputVoltage(+12.0f, -12.0f);
+		// set closed loop gains in slot0 - see documentation 
+		//elevator.setProfile(0);
+		//elevator.setF(0);
+		//elevator.setP(0);
+		//elevator.setI(0);
+		//elevator.setD(0);
+		//elevator.setMotionMagicCruiseVelocity(0);
+		//elevator.setMotionMagicAcceleration(0);
+		//elevator.config_kF(0, .5, 10);
+		elevator.set(ControlMode.Position, target);
+		//elevator.c
+	}
 
 }

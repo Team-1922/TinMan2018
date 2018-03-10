@@ -8,6 +8,7 @@
 package org.usfirst.frc.team1922.robot;
 
 import org.usfirst.frc.team1922.robot.commands.*;
+import org.usfirst.frc.team1922.robot.extras.LimitSwitch;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -28,12 +29,15 @@ public class OI {
 	private XboxController m_operator;
 	//private Joystick m_operator;
 	private Button leftTrigger;
+	private Button rightTrigger;
 	private Button operatorTrigger;
 	private Button operatorSecond;
 	private Button operatorThird;
-	//private Button operatorFourth;
+	private Button operatorFourth;
 	private Button operatorRB;
 	private Button operatorLB;
+	
+	private Button limitSwitch_bot;
 	
 	public OI() {			
 		m_leftStick = new Joystick(1);
@@ -41,21 +45,24 @@ public class OI {
 		m_operator = new XboxController(2);
 		//m_operator = new Joystick(2);
 		leftTrigger = new JoystickButton(getLeftStick(), 1);
+		rightTrigger = new JoystickButton(getRightStick(), 1);
 		operatorTrigger = new JoystickButton(getOperator(), 1);
 		operatorSecond = new JoystickButton(getOperator(), 2);
 		operatorThird = new JoystickButton(getOperator(), 3);
-		//operatorFourth = new JoystickButton(getOperator(), 4);
+		operatorFourth = new JoystickButton(getOperator(), 4);
 		operatorRB = new JoystickButton(getOperator(), 6);
 		operatorLB = new JoystickButton(getOperator(), 5);
+		limitSwitch_bot = new LimitSwitch(1);
 
 		operatorTrigger.whenPressed(new ElevateToScale_Command());
 		operatorSecond.whenPressed(new ElevateToSwitch_Command());
 		operatorThird.whenPressed(new ElevateToGround_Command());
-		//operatorFourth.whenPressed(new Deposit_Command());
+		//operatorFourth.whenPressed(new Turn_Command());
 		operatorRB.whileHeld(new ElevatorUp_Command());
 		operatorLB.whileHeld(new ElevatorDown_Command());
+		limitSwitch_bot.whenPressed(new ZeroElevator_Command());
+		//rightTrigger.whenPressed(new DriveStraight_Command());
 	}
-	
 	
 	public Joystick getLeftStick() {
 		return m_leftStick;

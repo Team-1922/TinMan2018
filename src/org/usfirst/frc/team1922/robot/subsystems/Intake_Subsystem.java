@@ -29,8 +29,8 @@ public class Intake_Subsystem extends Subsystem{
 	}
 	
 	public void run(XboxController operator) {
-		leftIntake.set(operator.getTriggerAxis(Hand.kRight));
-		rightIntake.set(operator.getTriggerAxis(Hand.kRight));
+		leftIntake.set(operator.getRawAxis(1));
+		rightIntake.set(operator.getRawAxis(1));
 		SmartDashboard.putString("Intake_Subsystem", "Running");
 	}
 	
@@ -49,5 +49,12 @@ public class Intake_Subsystem extends Subsystem{
 		rightIntake.set(0);
 		leftIntake.set(0);
 		SmartDashboard.putString("Intake_Subsytem", "stopped");
+	}
+
+	public void runLeft(double value) {
+		leftIntake.set(value);
+	}
+	public void runRight(double value) {
+		rightIntake.set(value);
 	}
 }

@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team1922.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Joystick.ButtonType;
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
 	public static Elevator_Subsystem m_elevator;
 	public static OI m_oi;
 
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -40,10 +42,12 @@ public class Robot extends TimedRobot {
 		m_driveTrain = new DriveTrain_Subsystem();
 		m_intake = new Intake_Subsystem();
 		m_elevator = new Elevator_Subsystem();
-		//m_autonomousCommand = new ScaleAuto();
+		m_autonomousCommand = new ScaleAuto();
 		
 		
 		m_oi = new OI();
+		CameraServer.getInstance().startAutomaticCapture();
+		
 	}
 
 	@Override
@@ -64,7 +68,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
+		if (m_autonomousCommand != null) {
+			m_autonomousCommand.start();
+		}
 	}
 
 	@Override

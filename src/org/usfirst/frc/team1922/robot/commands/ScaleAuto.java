@@ -7,7 +7,7 @@ public class ScaleAuto extends CommandGroup{
 
 	public ScaleAuto(){
 		addSequential(new DriveToScale_Command());
-		addParallel(new ElevateToScale_Command());
+		addSequential(new ElevateToScale_Command());
 		//addSequential(new Turn_Command());
 		addSequential(new Deposit_Command());
 	}

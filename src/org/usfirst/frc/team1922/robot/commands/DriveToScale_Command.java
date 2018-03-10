@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
-import org.usfirst.frc.team1922.robot.RobotMap;
+//import org.usfirst.frc.team1922.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,6 +10,7 @@ public class DriveToScale_Command extends Command{
 	public DriveToScale_Command(){
 		super();
 		requires(Robot.m_driveTrain);
+		setTimeout(4);
 	}
 	
 	@Override protected void initialize() {
@@ -33,9 +34,12 @@ public class DriveToScale_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
+		/*
 		if(Robot.m_driveTrain.getFrontRightPos() >= RobotMap.SCALE_DISTANCE) {
 			return true;
 		}
 		return false;
+		*/
+		return isTimedOut();
 	}
 }
