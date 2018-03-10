@@ -44,10 +44,13 @@ public class Robot extends TimedRobot {
 		m_elevator = new Elevator_Subsystem();
 		m_autonomousCommand = new ScaleAuto();
 		
-		
 		m_oi = new OI();
 		CameraServer.getInstance().startAutomaticCapture();
-		
+		m_chooser.addDefault("Drive Straight", new AutoTest());
+		m_chooser.addObject("Scale Auto", new ScaleAuto());
+		m_chooser.addObject("Drive Square", new SquareAuto());
+		SmartDashboard.putData("Auto Chooser", m_chooser);
+	
 	}
 
 	@Override
@@ -69,7 +72,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		if (m_autonomousCommand != null) {
+			m_autonomousCommand = m_chooser.getSelected();
 			m_autonomousCommand.start();
+			
 		}
 	}
 

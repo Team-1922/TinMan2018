@@ -15,7 +15,7 @@ public class DriveStraight_Command extends Command{
 	public DriveStraight_Command() {
 		super();
 		requires(Robot.m_driveTrain);
-		setTimeout(10);
+		setTimeout(3);
 	}
 	
 	@Override 

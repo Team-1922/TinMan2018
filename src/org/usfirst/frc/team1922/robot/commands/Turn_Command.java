@@ -32,7 +32,7 @@ public class Turn_Command extends Command{
 	@Override
 	protected void initialize() {
 		start = Robot.m_driveTrain.getAngle();
-		Robot.m_driveTrain.drive(direction*(.55), -direction*(.55));
+		Robot.m_driveTrain.drive(direction*(.2), -direction*(.2));
 		SmartDashboard.putString("Turn_Command", "intialized");
 	}
 	

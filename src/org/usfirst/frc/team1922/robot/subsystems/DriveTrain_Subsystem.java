@@ -41,10 +41,10 @@ public class DriveTrain_Subsystem extends Subsystem{
 	}
 	
 	public void lowGear(){
-		gearShift.set(true);
+		gearShift.set(false);
 	}
 	public void highGear(){
-		gearShift.set(false);
+		gearShift.set(true);
 	}
 	
 	@Override
