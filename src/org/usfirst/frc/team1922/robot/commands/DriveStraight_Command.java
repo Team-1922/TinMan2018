@@ -12,10 +12,10 @@ public class DriveStraight_Command extends Command{
 	private double error = 0;
 	private double start;
 	
-	public DriveStraight_Command() {
+	public DriveStraight_Command(int TimeOut) {
 		super();
 		requires(Robot.m_driveTrain);
-		setTimeout(3);
+		setTimeout(TimeOut);
 	}
 	
 	@Override 

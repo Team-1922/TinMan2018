@@ -54,13 +54,15 @@ public class OI {
 		operatorLB = new JoystickButton(getOperator(), 5);
 		limitSwitch_bot = new LimitSwitch(1);
 
-		operatorTrigger.whenPressed(new ElevateToScale_Command());
+		//operatorTrigger.whenPressed(new ElevateToScale_Command());
+		operatorTrigger.whenPressed(new ZeroDrive_Command());
 		operatorSecond.whenPressed(new ElevateToSwitch_Command());
 		operatorThird.whenPressed(new ElevateToGround_Command());
 		//operatorFourth.whenPressed(new Turn_Command());
 		operatorRB.whileHeld(new ElevatorUp_Command());
 		operatorLB.whileHeld(new ElevatorDown_Command());
-		limitSwitch_bot.whenPressed(new ZeroElevator_Command());
+		
+		//limitSwitch_bot.whenPressed(new ZeroDrive_Command());
 		//rightTrigger.whenPressed(new DriveStraight_Command());
 	}
 	

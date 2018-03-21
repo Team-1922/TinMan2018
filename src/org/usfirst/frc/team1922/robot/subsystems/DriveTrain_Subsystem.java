@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1922.robot.subsystems;
 
+import org.usfirst.frc.team1922.robot.Robot;
 import org.usfirst.frc.team1922.robot.RobotMap;
 import org.usfirst.frc.team1922.robot.commands.TankDrive_Command;
 import edu.wpi.first.wpilibj.SPI;
@@ -27,8 +28,8 @@ public class DriveTrain_Subsystem extends Subsystem{
 		super();
 		SmartDashboard.putString("DriveTrain_Subsytem", "Created");
 		//rearLeft.config
-		//rearLeft.setSelectedSensorPosition(0, 0, 10);
-		//rearRight.setSelectedSensorPosition(0, 0, 10);
+		rearLeft.setSelectedSensorPosition(0, 0, 10);
+		rearRight.setSelectedSensorPosition(0, 0, 10);
 		
 		frontLeft.set(ControlMode.Follower, rearLeft.getDeviceID());
 		frontRight.set(ControlMode.Follower, rearRight.getDeviceID());
@@ -38,6 +39,14 @@ public class DriveTrain_Subsystem extends Subsystem{
 	
 	public double getAngle() {
 		return gyro.getAngle();
+	}
+	
+	public int getPosLeft() {
+		return rearLeft.getSensorCollection().getQuadraturePosition();
+	}
+	
+	public int getPosRight() {
+		return rearRight.getSensorCollection().getQuadraturePosition();
 	}
 	
 	public void lowGear(){
@@ -63,6 +72,7 @@ public class DriveTrain_Subsystem extends Subsystem{
 		rearRight.set(right);
 		//frontRight.set(right);
 		SmartDashboard.putString("DriveTrain_Subsytem mode", "lowDrive");
+		readEncoders();
 	}
 
 	public void highDrive(Joystick rightStick) {
@@ -75,6 +85,7 @@ public class DriveTrain_Subsystem extends Subsystem{
 		rearRight.set(right);
 		//frontRight.set(right);
 		SmartDashboard.putString("DriveTrain_Subsytem mode", "highDrive");
+		readEncoders();
 	}
 	
 	public void stop() {
@@ -85,26 +96,26 @@ public class DriveTrain_Subsystem extends Subsystem{
 		SmartDashboard.putString("DriveTrain_Subsytem stop", "ran");
 	}
 
-	/*
 	public void readEncoders() {
-		SmartDashboard.putNumber("Right Drive", (double)(getRightPos()));
-		SmartDashboard.putNumber("Left Drive", (double)(getLeftPos()));
+		SmartDashboard.putNumber("getPosRight", (double)(getPosRight()));
+		SmartDashboard.putNumber("getPosLeft", (double)(getPosLeft()));
+		SmartDashboard.putNumber("Average Distance Travelled", (getPosLeft()-getPosRight())/2);
+		SmartDashboard.putNumber("GYRO2", getAngle());
 	}
-	
-	public int getRightPos() {
-		return rearRight.getSensorCollection().getQuadraturePosition();
-	}
-
-	public int getLeftPos() {
-		return rearLeft.getSensorCollection().getQuadraturePosition();
-	}
-	*/
 	
 	public void drive(double left, double right) {
 		rearLeft.set(left);
 		//frontLeft.set(left);
 		rearRight.set(-right);
 		//frontRight.set(right);
-		SmartDashboard.putString("DriveTrain_Subsytem mode", "drive" + left + " / " + right);
+		SmartDashboard.putNumber("Drive Speed Right", right);
+		SmartDashboard.putNumber("Drive Speed Left", left);
+		readEncoders();
+	}
+
+	public void zeroEncoders() {
+		rearLeft.setSelectedSensorPosition(0, 0, 0);
+		rearRight.setSelectedSensorPosition(0, 0 , 0);
+		
 	}
 }
