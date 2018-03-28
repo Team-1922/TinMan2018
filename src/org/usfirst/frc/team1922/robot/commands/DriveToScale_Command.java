@@ -1,29 +1,29 @@
 package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
-import org.usfirst.frc.team1922.robot.RobotMap;
+//import org.usfirst.frc.team1922.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveToScale_Command extends Command{
+
 	
-	public DriveToScale_Command(){
+	public DriveToScale_Command() {
 		super();
 		requires(Robot.m_driveTrain);
-	}
-	
-	@Override protected void initialize() {
-		Robot.m_driveTrain.drive( 1, 1 );
+		setTimeout(5);
 	}
 	
 	@Override 
-	protected void execute() {
+	protected void initialize() {
+		Robot.m_driveTrain.drive(.25, .25); 
 		
 	}
 	
 	@Override
 	protected void end() {
-		Robot.m_elevator.stop();
+		Robot.m_driveTrain.stop();
 	}
 	
 	@Override
@@ -31,11 +31,11 @@ public class DriveToScale_Command extends Command{
 		end();
 	}
 	
+	@Override 
+	protected void execute() {}
+	
 	@Override
 	protected boolean isFinished() {
-		if(Robot.m_driveTrain.getFrontRightPos() >= RobotMap.SCALE_DISTANCE) {
-			return true;
-		}
-		return false;
+		return isTimedOut();
 	}
 }

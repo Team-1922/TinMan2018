@@ -3,6 +3,10 @@ package org.usfirst.frc.team1922.robot.commands;
 import org.usfirst.frc.team1922.robot.Robot;
 import org.usfirst.frc.team1922.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -12,8 +16,9 @@ public class ElevateToSwitch_Command extends Command{
 		super();
 		requires(Robot.m_elevator);
 	}
-	
+
 	@Override protected void initialize() {
+		/*
 		Robot.m_elevator.setSwitchLimit();
 		if(Robot.m_elevator.isBelowSwitch()) {
 			Robot.m_elevator.set(.25);
@@ -21,6 +26,8 @@ public class ElevateToSwitch_Command extends Command{
 		else {
 			Robot.m_elevator.set(-.25);
 		}
+		*/
+		Robot.m_elevator.goTo(RobotMap.ELEVATOR_SWITCH_HEIGHT);
 		SmartDashboard.putNumber("Elevator Target", (double)RobotMap.ELEVATOR_SWITCH_HEIGHT);
 	}
 	
@@ -31,7 +38,7 @@ public class ElevateToSwitch_Command extends Command{
 	
 	@Override
 	protected void end() {
-		Robot.m_elevator.removeSwitchLimit();
+		//Robot.m_elevator.removeSwitchLimit();
 		Robot.m_elevator.stop();
 	}
 	
@@ -42,10 +49,11 @@ public class ElevateToSwitch_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		if(Robot.m_elevator.isSwitch()) {
-			return true;
-		}
+		//if(Robot.m_elevator.isSwitch()) {
+		//	return true;
+		//}
 		return false;
 	}
+
 
 }

@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class OperateIntake_Command extends Command{
 	public  OperateIntake_Command() {
 		super();
-		
 		requires(Robot.m_intake);
-		
 		SmartDashboard.putString("OperateIntake_Command", "Created");
 	}
 	
@@ -19,14 +17,13 @@ public class OperateIntake_Command extends Command{
 	protected void initialize() {
 		SmartDashboard.putString("OperateIntake_Command", "Initialized");
 	}
-	
-	
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		Robot.m_intake.run(Robot.m_oi.getOperator());
-		SmartDashboard.putString("OperateIntake_Command execute", "executed");
+		Robot.m_intake.runLeft(-Robot.m_oi.getOperator().getRawAxis(1));
+		Robot.m_intake.runRight(Robot.m_oi.getOperator().getRawAxis(5));//(5)
+		SmartDashboard.putString("OperateIntake_Command execute", "execute");
 
 	}
 

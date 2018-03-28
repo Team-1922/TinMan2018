@@ -7,14 +7,16 @@
 
 package org.usfirst.frc.team1922.robot;
 
-//import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
-//import edu.wpi.first.wpilibj.Joystick.ButtonType;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import org.usfirst.frc.team1922.robot.commands.*;
+import org.usfirst.frc.team1922.robot.commands.*;
+import org.usfirst.frc.team1922.robot.commands.autogroups.Center_LeftSwitch;
 import org.usfirst.frc.team1922.robot.subsystems.*;
 
 
@@ -32,20 +34,21 @@ public class Robot extends TimedRobot {
 	public static Elevator_Subsystem m_elevator;
 	public static OI m_oi;
 
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
 	@Override
 	public void robotInit() {
 		m_driveTrain = new DriveTrain_Subsystem();
 		m_intake = new Intake_Subsystem();
 		m_elevator = new Elevator_Subsystem();
-		
+				
 		m_oi = new OI();
+		CameraServer.getInstance().startAutomaticCapture();
+		//m_chooser.addDefault("Center", new Center_LeftSwitch());
+		//SmartDashboard.putData("Auto Chooser", m_chooser);
+	
 	}
 
 	@Override
@@ -66,16 +69,17 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		//if (m_autonomousCommand != null) {
+			//m_autonomousCommand = m_chooser.getSelected();
+			m_autonomousCommand = new Center_LeftSwitch();
+			m_autonomousCommand.start();
+		//}
 	}
 
-	/**
-	 * This function is called periodically during autonomous.
-	 */
 	@Override
 	public void autonomousPeriodic() {
-		//Scheduler.getInstance().run();
-		//SmartDashboard.putString("autonomosPeriodic", "TEST");
+		Scheduler.getInstance().run();
+		SmartDashboard.putString("driveMode", "automous");
 	}
 
 	@Override
@@ -91,6 +95,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putString("teleopPeriodic", "teleopPeriodic");
+		SmartDashboard.putString("driveMode", "teleopPeriodic");
 	}
 }

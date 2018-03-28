@@ -6,7 +6,7 @@ import org.usfirst.frc.team1922.robot.commands.OperateIntake_Command;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-//import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController; 
@@ -29,10 +29,16 @@ public class Intake_Subsystem extends Subsystem{
 	}
 	
 	public void run(XboxController operator) {
-		leftIntake.set(operator.getTriggerAxis(Hand.kRight));
-		rightIntake.set(operator.getTriggerAxis(Hand.kRight));
+		leftIntake.set(operator.getRawAxis(1));
+		rightIntake.set(operator.getRawAxis(1));
 		SmartDashboard.putString("Intake_Subsystem", "Running");
 	}
+	
+	//public void run(Joystick operator) {
+		//leftIntake.set(operator.getY());
+		//rightIntake.set(operator.getY());
+		//SmartDashboard.putString("Intake_Subsystem", "Running");
+	//}
 	
 	public void set(double in) {
 		leftIntake.set(in);
@@ -43,5 +49,12 @@ public class Intake_Subsystem extends Subsystem{
 		rightIntake.set(0);
 		leftIntake.set(0);
 		SmartDashboard.putString("Intake_Subsytem", "stopped");
+	}
+
+	public void runLeft(double value) {
+		leftIntake.set(value);
+	}
+	public void runRight(double value) {
+		rightIntake.set(value);
 	}
 }
