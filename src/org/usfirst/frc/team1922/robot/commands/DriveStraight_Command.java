@@ -8,8 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight_Command extends Command{
 
-	private final double kP = .03;
-	private double error = 0;
+//	private final double kP = .03;
+//	private double error = 0;
+	//Unused, but unsure if I should comment out 
 	private double start;
 	
 	public DriveStraight_Command(int TimeOut) {
@@ -27,19 +28,7 @@ public class DriveStraight_Command extends Command{
 	@Override 
 	protected void execute() {
 		
-		error = start - Robot.m_driveTrain.getAngle();
-		
-		if (error > 0) {
-			Robot.m_driveTrain.drive(.35, .35-kP*error);
-		}
-		else if (error < 0) {
-			Robot.m_driveTrain.drive(.35+kP*error, .35);
-		}
-		else {
-			Robot.m_driveTrain.drive(.35, .35);
-		}
-		
-		SmartDashboard.putNumber("Error", error);
+		Robot.m_driveTrain.drive(.25, .25);
 	}
 	
 	@Override

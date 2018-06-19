@@ -2,7 +2,6 @@ package org.usfirst.frc.team1922.robot.commands;
 import org.usfirst.frc.team1922.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ZeroDrive_Command extends Command{
 	
@@ -14,13 +13,12 @@ public class ZeroDrive_Command extends Command{
 	@Override
 	protected void initialize() {
 		Robot.m_driveTrain.zeroEncoders();
-		SmartDashboard.putString("Zero Drive Command", "Is Running");
-	}
+		Robot.m_driveTrain.ZeroDisplacement();
+		}
 	
 	@Override
 	protected boolean isFinished() {
 		Robot.m_driveTrain.readEncoders();
-		SmartDashboard.putString("Zero Drive Command", "Is Finished");
 		return true;
 	}
 }

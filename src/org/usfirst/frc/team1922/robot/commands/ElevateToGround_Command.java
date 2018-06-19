@@ -30,7 +30,6 @@ public class ElevateToGround_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		//return Robot.m_elevator.isBot();
 		return false;
 	}
 	

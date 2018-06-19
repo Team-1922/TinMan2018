@@ -28,7 +28,6 @@ public class ElevatorDown_Command extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		//return Robot.m_elevator.isTop();
 		return false;
 	}
 	
