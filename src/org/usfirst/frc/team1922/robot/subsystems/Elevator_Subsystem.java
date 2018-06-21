@@ -5,12 +5,12 @@ import org.usfirst.frc.team1922.robot.RobotMap;
 import org.usfirst.frc.team1922.robot.commands.OperateElevator_Command;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+//import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.PIDController;
+//import edu.wpi.first.wpilibj.DriverStation;
+//import edu.wpi.first.wpilibj.PIDController;
+//import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,27 +18,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Elevator_Subsystem extends Subsystem{
 
 	private WPI_TalonSRX elevator; 
-	private WPI_TalonSRX elevator2;
-	private Solenoid deployer;
+	//private WPI_TalonSRX elevator2; // Placeholder for second elevator motor
+	 Solenoid deployer;
 	private Solenoid ratchet;
-	private PIDController controller;
+	//private PIDController controller;
 	int lastEncoder = 0;
-	double kp = .03;
-	
+	double kp = .0005, ki = 1, kd = 0;
+	     
 	public Elevator_Subsystem() {
 		super();
 		elevator = new WPI_TalonSRX(RobotMap.ELEVATOR);
+		elevator.enableCurrentLimit(true);
+		elevator.configPeakCurrentLimit(0, 0);
+		elevator.configContinuousCurrentLimit(30, 0);
+		elevator.configPeakCurrentDuration(0, 0);
+		
 		//elevator.configSelectedFeedbackSensor(FeedbackDevice., arg1, arg2)
-		elevator.setSensorPhase(true);
+		elevator.setSensorPhase(false);
 		elevator.setSelectedSensorPosition(0, 0, 10);
-		elevator.configForwardSoftLimitEnable(true, 10);
-		elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 10);
-		elevator.configReverseSoftLimitEnable(true, 10);
-		elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 10);
+		elevator.configForwardSoftLimitEnable(false, 10);
+		//elevator.configForwardSoftLimitThreshold(RobotMap.ELEVATOR_SCALE_HEIGHT, 10);
+		elevator.configReverseSoftLimitEnable(false, 10);
+		//elevator.configReverseSoftLimitThreshold(RobotMap.ELEVATOR_BOTTOM, 10);
 		//elevator.configReverseSoftLimitEnable(false, 10);
 		//elevator.configForwardSoftLimitEnable(false, 10);
 		
-		elevator.config_kP(1,1,10);
+		elevator.config_kP(1,.01,10);
 		
 		//elevator2 = new WPI_TalonSRX(RobotMap.ELEVATOR2);
 		//elevator2.setSelectedSensorPosition(0, 0, 10);
@@ -51,13 +56,17 @@ public class Elevator_Subsystem extends Subsystem{
 		
 		deployer = new Solenoid(RobotMap.DEPLOYER);
 		ratchet = new Solenoid(RobotMap.RATCHET);
+		//retractElevator();
+		//controller = new PIDController(kp, ki, kd, , (PIDSource) elevator, elevator);
+	}
 
-		SmartDashboard.putString("Elevator_Subsytem", "created");
-		
-		deploy(true);
-		//controller = new PIDController(kP, kI, kD, , elevator);
+	public void deployElevator() {
+		deployer.set(false);
 	}
 	
+	public void retractElevator() {
+		deployer.set(true);
+	}
 	
 	public int getLastEncoder() {
 		return lastEncoder;
@@ -71,17 +80,12 @@ public class Elevator_Subsystem extends Subsystem{
 		elevator.setSelectedSensorPosition(0, 0, 0);
 	}
 	
-	public void deploy(boolean input){
-		deployer.set(input);
-	}
-	
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new OperateElevator_Command());
 	}
 		
 	public void set(double in) { 
-		//ratchet.set(false);
 		elevator.set(in);
 		//elevator2.follow(elevator);
 		//elevator2.set((elevator.get()));
@@ -99,9 +103,10 @@ public class Elevator_Subsystem extends Subsystem{
 	}
 	
 	public void stop() {
-		elevator.set(ControlMode.Position, lastEncoder);
+		//elevator.set(ControlMode.Position, lastEncoder);
 		//elevator2.follow(elevator);
-		//elevator.set(0);
+		elevator.set(0);
+		
 	}
 	
 	public boolean isTop() {
@@ -145,10 +150,14 @@ public class Elevator_Subsystem extends Subsystem{
 	}
 
 
-	public void freeze(int last) {
-		double error = last - getPosition();
-		elevator.set(kp*error);
-		SmartDashboard.putNumber("freeze at", last);
+	public void freeze(int dest) {
+		double error = dest - getPosition();
+		elevator.set(-kp*error);
+
+		
+		SmartDashboard.putNumber("freeze at", dest);
+		SmartDashboard.putNumber("freeze error", error);
+		SmartDashboard.putNumber("freeze input speed", -kp*error);
 	}
 	
 	public void goTo(double target){

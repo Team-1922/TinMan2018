@@ -7,47 +7,51 @@
 
 package org.usfirst.frc.team1922.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.CameraServer; //Used for drive camera
+import edu.wpi.first.wpilibj.DriverStation; 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team1922.robot.commands.*;
-import org.usfirst.frc.team1922.robot.commands.autogroups.Center_LeftSwitch;
+import org.usfirst.frc.team1922.robot.commands.autogroups.*;
 import org.usfirst.frc.team1922.robot.subsystems.*;
 
-
-
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.properties file in the
- * project.
- */
 public class Robot extends TimedRobot {
-	public static DriveTrain_Subsystem m_driveTrain;
+	public static DriveTrain_Subsystem m_driveTrain; 
 	public static Intake_Subsystem m_intake;
 	public static Elevator_Subsystem m_elevator;
 	public static OI m_oi;
 
 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Integer> m_chooser = new SendableChooser<>(); //Allows options to be added in the SmartDashboard
+	
+	public static String getPositions() {
+		return DriverStation.getInstance().getGameSpecificMessage();
+		/** Gets the FMS (Field management system) data, returned in a three char string, EX. RRR, LRL, 
+		 depending on the switch and scale alignment
+		 */
+	}
 
 	@Override
-	public void robotInit() {
+	public void robotInit() { //Runs once when the bot initializes, perfect for declaring variables
 		m_driveTrain = new DriveTrain_Subsystem();
 		m_intake = new Intake_Subsystem();
 		m_elevator = new Elevator_Subsystem();
-				
+		
+		
+		
 		m_oi = new OI();
-		CameraServer.getInstance().startAutomaticCapture();
-		//m_chooser.addDefault("Center", new Center_LeftSwitch());
-		//SmartDashboard.putData("Auto Chooser", m_chooser);
+		//CameraServer.getInstance().startAutomaticCapture();
+		m_chooser.addDefault("Do Nothing", 0); //Specific option to be added to the SmartDashboard
+		m_chooser.addObject("Cross Auto Line", 1);
+		
+		m_chooser.addObject("Center", 2);
+		m_chooser.addObject("Left", 3);
+		m_chooser.addObject("Right", 4);
+		m_chooser.addObject("Test", 5);
+		SmartDashboard.putData("Auto Chooser", m_chooser);
 	
 	}
 
@@ -56,28 +60,34 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
 	@Override
-	public void autonomousInit() {
-		//if (m_autonomousCommand != null) {
-			//m_autonomousCommand = m_chooser.getSelected();
-			m_autonomousCommand = new Center_LeftSwitch();
+	public void autonomousInit() { //Runs once when Auto begins
+		if(m_chooser.getSelected() == 0){ //Links the auto choices in the Dashboard to the autonomous files
+			m_autonomousCommand = null;
+		}
+		else if(m_chooser.getSelected() == 1) {
+			m_autonomousCommand = new CrossAutoLine();
+		}
+		else if(m_chooser.getSelected() == 2) {
+			m_autonomousCommand = new Center();
+		}
+		else if(m_chooser.getSelected() == 3) {
+			m_autonomousCommand = new Left();
+		}
+		else if(m_chooser.getSelected() == 4) {
+			m_autonomousCommand = new Right();
+		}
+		else if(m_chooser.getSelected() == 5) {
+			m_autonomousCommand = new Test();
+		}
+		if (m_autonomousCommand != null) {
+			//m_autonomousCommand = new Center_LeftSwitch();
 			m_autonomousCommand.start();
-		//}
+		}
 	}
 
 	@Override
-	public void autonomousPeriodic() {
+	public void autonomousPeriodic() { //Periodically called during auto, name checks out
 		Scheduler.getInstance().run();
 		SmartDashboard.putString("driveMode", "automous");
 	}
@@ -89,9 +99,6 @@ public class Robot extends TimedRobot {
 		}
 	}
 	
-	/**
-	 * This function is called periodically during operator control.
-	 */
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();

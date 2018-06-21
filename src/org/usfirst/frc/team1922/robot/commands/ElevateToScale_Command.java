@@ -15,14 +15,15 @@ public class ElevateToScale_Command extends Command{
 	
 	@Override
 	protected void initialize() {
-		//Robot.m_elevator.goTo(100);
-		Robot.m_elevator.set(.5);
+		//Robot.m_elevator.set(.5);
 		SmartDashboard.putNumber("Elevator Target", (double)RobotMap.ELEVATOR_SCALE_HEIGHT);
 	}
 	
 	@Override
 	protected void execute() {
 		Robot.m_elevator.readEncoder();
+		Robot.m_elevator.freeze(RobotMap.ELEVATOR_SCALE_HEIGHT);
+		
 	}
 	
 	@Override
@@ -32,8 +33,8 @@ public class ElevateToScale_Command extends Command{
 	
 	@Override
 	protected boolean isFinished() {
-		return Robot.m_elevator.isTop();
-		//return false;
+//		return Robot.m_elevator.isTop();
+		return false;
 	}
 	
 	@Override 

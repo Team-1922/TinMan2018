@@ -1,18 +1,26 @@
-/*package org.usfirst.frc.team1922.robot.commands;
+package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
-
+import org.usfirst.frc.team1922.robot.subsystems.Elevator_Subsystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DeployElevator_Command extends Command {
 	public DeployElevator_Command(){
 		super();
+		requires(Robot.m_elevator);
+		setTimeout(1);
+		
 	}
 	
 	@Override
 	protected void initialize() {
-		Robot.m_elevator.deploy(true);
-		
+		Robot.m_elevator.set(.6);
+
+	}
+	
+	@Override
+	protected boolean isFinished() {
+		return isTimedOut();
 	}
 	
 	@Override
@@ -22,14 +30,10 @@ public class DeployElevator_Command extends Command {
 	
 	@Override
 	protected void end() {
-		
+		Robot.m_elevator.deployElevator();
 	}
 	
-	@Override
-	protected boolean isFinished() {
-		//return Robot.m_elevator.isTop();
-		return true;
-	}
+
 	
 	@Override 
 	protected void interrupted() {
@@ -37,4 +41,4 @@ public class DeployElevator_Command extends Command {
 	}
 
 }
-*/
+
