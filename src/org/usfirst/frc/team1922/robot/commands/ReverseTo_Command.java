@@ -5,19 +5,19 @@ import org.usfirst.frc.team1922.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveTo_Command extends Command{
+public class ReverseTo_Command extends Command{
 
 	private double heading, destination, error, speed, kp;
 	
-	public DriveTo_Command(double heading, double feet) {
+	public ReverseTo_Command(double heading, double feet) {
 		super();
 		requires(Robot.m_driveTrain);
 		this.destination = feet;
 		this.heading = heading;
-		speed = .5; //.5
+		speed = .7;
 	}
 	
-	public DriveTo_Command(double heading, double feet, double speed) {
+	public ReverseTo_Command(double heading, double feet, double speed) {
 		super();
 		requires(Robot.m_driveTrain);
 		this.destination = feet;
@@ -36,7 +36,7 @@ public class DriveTo_Command extends Command{
 	@Override
 	protected void initialize() {
 		error = 0;
-		kp = .01;
+		kp = .007;
 		SmartDashboard.putNumber("Drive to heading", heading);
 	}
 	

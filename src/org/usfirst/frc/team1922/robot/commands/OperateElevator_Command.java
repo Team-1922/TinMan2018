@@ -11,11 +11,13 @@ public class OperateElevator_Command extends Command{
 	public OperateElevator_Command() {
 		super();
 		requires(Robot.m_elevator);
-		int last = 0;
+		//int last = 0;
 	}
 	
 	@Override
-	protected void initialize() {}
+	protected void initialize() {
+		last = Robot.m_elevator.getPosition();
+	}
 	
 	@Override
 	protected void execute() {
@@ -26,9 +28,10 @@ public class OperateElevator_Command extends Command{
 		}
 		else {
 			Robot.m_elevator.stop();
+			//obot.m_elevator.freeze(last);
 		}
 		Robot.m_elevator.readEncoder();
-		SmartDashboard.putNumber("last encoder", (double)(Robot.m_elevator.getLastEncoder()));
+		SmartDashboard.putNumber("Elevator Height", last);
 	}
 	
 	@Override

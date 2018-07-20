@@ -22,7 +22,6 @@ public class Deposit_Command extends Command{
 	@Override
 	protected boolean isFinished() {
 		return isTimedOut();
-		//return false;
 	}
 	
 	@Override
