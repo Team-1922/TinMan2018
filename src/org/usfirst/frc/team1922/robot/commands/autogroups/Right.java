@@ -7,6 +7,7 @@ import org.usfirst.frc.team1922.robot.commands.Deposit_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToScale_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToSwitch_Command;
+import org.usfirst.frc.team1922.robot.commands.TurnTo_Command;
 import org.usfirst.frc.team1922.robot.commands.Wait;
 import org.usfirst.frc.team1922.robot.commands.ZeroDrive_Command;
 
@@ -31,7 +32,8 @@ public class Right extends CommandGroup{
 			
 			addSequential( new ZeroDrive_Command());
 			addSequential( new Wait(.5));
-			addSequential( new DriveTo_Command(-90, 6));
+			addSequential( new TurnTo_Command(-90));
+			//addSequential( new DriveTo_Command(-90, 6));
 			addSequential( new Wait(.2));
 			
 			addSequential( new Deposit_Command());	
@@ -51,7 +53,8 @@ public class Right extends CommandGroup{
 				
 				addSequential( new ZeroDrive_Command());
 				addSequential( new Wait(.5));
-				addSequential( new DriveTo_Command(-90, 5));
+				addSequential( new TurnTo_Command(-90));
+				//addSequential( new DriveTo_Command(-90, 5));
 				addSequential( new Wait(.2));
 				
 				addSequential( new Deposit_Command());
