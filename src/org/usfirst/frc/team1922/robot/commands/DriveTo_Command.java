@@ -54,7 +54,7 @@ public class DriveTo_Command extends Command{
 			SmartDashboard.putString("Drive_To_Command", "Is Finished");
 			 return true;
 		}
-		else if (Math.abs(Robot.m_driveTrain.getPitch()) >= 10) {
+		else if (Math.abs(Robot.m_driveTrain.getPitch()) >= 10) { //10
 			SmartDashboard.putString("Drive_To_Command", "Terminated: pitch error");
 			return true;
 		}

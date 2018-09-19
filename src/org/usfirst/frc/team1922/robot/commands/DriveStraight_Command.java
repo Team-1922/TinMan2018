@@ -8,15 +8,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveStraight_Command extends Command{
 
-//	private final double kP = .03;
-//	private double error = 0;
+	private final double kP = .03;
+	private double error = 0;
 	//Unused, but unsure if I should comment out 
-	private double start;
+	private double destination, start, heading;
 	
-	public DriveStraight_Command(int TimeOut) {
+	public DriveStraight_Command(int feet) {
 		super();
 		requires(Robot.m_driveTrain);
-		setTimeout(TimeOut);
+		this.destination = feet;
+		this.heading = start;		
+	}
+	
+	private void readValues() {
+		SmartDashboard.putNumber("Current Gyro:", Robot.m_driveTrain.getAngle());
+		SmartDashboard.putNumber("Drive to Destination", destination);
 	}
 	
 	@Override 
@@ -27,14 +33,30 @@ public class DriveStraight_Command extends Command{
 	
 	@Override 
 	protected void execute() {
-		
-		Robot.m_driveTrain.drive(.25, .25);
+		error = heading - Robot.m_driveTrain.getAngle();
+		Robot.m_driveTrain.drive(.5, .5);
+		//Robot.m_driveTrain.drive(.5 + kP*error , .5 - kP*error);
+		readValues();
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return isTimedOut();
-	}
+		if ( Robot.m_driveTrain.getAverageDistanceFeet() >= destination) {
+			SmartDashboard.putString("Drive_To_Command", "Is Finished");
+			 return true;
+		}
+		else if (Math.abs(Robot.m_driveTrain.getPitch()) >= 10) {
+			SmartDashboard.putString("Drive_To_Command", "Terminated: pitch error");
+			return true;
+		}
+		else {
+			SmartDashboard.putNumber("Drive To progress", Robot.m_driveTrain.getDisplacement());
+			SmartDashboard.putNumber("Drive to destination", destination);
+			return false; 
+		}
+
+}
 	
 }
+
 
