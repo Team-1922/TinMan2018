@@ -33,7 +33,7 @@ public class DriveStraight_Command extends Command{
 	
 	@Override 
 	protected void execute() {
-		error = heading - Robot.m_driveTrain.getAngle();
+		error = heading -     Robot.m_driveTrain.getAngle();
 		Robot.m_driveTrain.drive(.5, .5);
 		//Robot.m_driveTrain.drive(.5 + kP*error , .5 - kP*error);
 		readValues();
