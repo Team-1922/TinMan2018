@@ -15,6 +15,5 @@ public class Test extends CommandGroup{
 		addSequential (new Wait (2));
 		addSequential (new DriveStraight_Command(10));
 		//addSequential (new DriveStraight_Command(20));
-	
 	}
 }
