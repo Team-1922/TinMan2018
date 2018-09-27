@@ -20,13 +20,13 @@ public class Center extends CommandGroup{
 
 			addSequential( new ZeroDrive_Command());
 			addSequential (new Wait(.2));
-			addSequential( new DriveTo_Command(0, 2)); 
+			addSequential( new DriveTo_Command(0, 4.25 - RobotMap.BotLength)); 
 			addSequential( new Wait(.2));
 		
 			addSequential( new ZeroDrive_Command());
 			addSequential( new Wait(.2));
 			addParallel( new DeployElevator_Command());
-			addSequential( new DriveTo_Command(-46.979, 9 - RobotMap.BotLength)); 
+			addSequential( new DriveTo_Command(-46.979, 9.6 - RobotMap.BotLength)); 
 			
 			addSequential( new Wait(.2));
 		

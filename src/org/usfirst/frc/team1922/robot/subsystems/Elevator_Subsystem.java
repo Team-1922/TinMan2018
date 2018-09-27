@@ -19,7 +19,7 @@ public class Elevator_Subsystem extends Subsystem{
 
 	private WPI_TalonSRX elevator; 
 	//private WPI_TalonSRX elevator2; // Placeholder for second elevator motor
-	 Solenoid deployer;
+	Solenoid deployer;
 	private Solenoid ratchet;
 	//private PIDController controller;
 	int lastEncoder = 0;
