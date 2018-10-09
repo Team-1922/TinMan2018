@@ -4,19 +4,21 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurnTo_Command extends Command{
-    private int direction;
+    private double direction;
     private double start;
     private boolean isFinished = false;
-    private double angle;
-    public TurnTo_Command(double angle) {
-        super();
-        requires(Robot.m_driveTrain);
-        direction = 1;
-        SmartDashboard.putString("Turn_Command", "Created");
-        this.angle = angle;
-    }
+    private boolean isLeft = false;
+//    private double angle;
     
-    public TurnTo_Command(int direction) {
+//    public TurnTo_Command(double angle) {
+//        super();
+//        requires(Robot.m_driveTrain);
+//        direction = 1;
+//        SmartDashboard.putString("Turn_Command", "Created");
+//        this.angle = angle;
+//    }
+    
+    public TurnTo_Command(double direction) {
         super();
         requires(Robot.m_driveTrain);
         this.direction = direction;
@@ -25,20 +27,40 @@ public class TurnTo_Command extends Command{
     @Override
     protected void initialize() {
         start = Robot.m_driveTrain.getAngle();
-        Robot.m_driveTrain.drive(direction*(.2), -direction*(.2));
+        if( direction >= 0 ){
+        	Robot.m_driveTrain.drive(.4,-.4);
+        }else{ 
+        	isLeft = true;
+        	Robot.m_driveTrain.drive(-.35,.35);
+        	
+        }
+        SmartDashboard.putString("Turn Direction", "" + direction);
+        SmartDashboard.putString("Start Start", "" + start);
+        
         SmartDashboard.putString("Turn_Command", "intialized");
     }
     
     @Override
     protected void execute() {
         //if(direction != -1);  
-            if(Robot.m_driveTrain.getAngle() <= start + angle) {
+    	  if(isLeft == false){
+            if(Robot.m_driveTrain.getAngle() <= start + direction) {
                 SmartDashboard.putString("Turn_Command", "pass");
             }
             else {
                 SmartDashboard.putString("Turn_Command", "fail");
                 isFinished = true;
             }
+    	  } else { //is turning left
+    		  if(Robot.m_driveTrain.getAngle() >= start + direction) {
+                  SmartDashboard.putString("Turn_Command", "pass left");
+                  SmartDashboard.putString("Current Angle", "" + Robot.m_driveTrain.getAngle());
+              }
+              else {
+                  SmartDashboard.putString("Turn_Command", "fail");
+                  isFinished = true;
+              }
+    	  }
     }
     
     @Override protected void end() {

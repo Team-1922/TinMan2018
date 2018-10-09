@@ -31,7 +31,7 @@ public class DriveTrain_Subsystem extends Subsystem{
 		rearLeft.setSelectedSensorPosition(0, 0, 10);
 		rearRight.setSelectedSensorPosition(0, 0, 10);
 		rearLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
-		rearLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		rearRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		
 		frontLeft.set(ControlMode.Follower, rearLeft.getDeviceID());
 		frontRight.set(ControlMode.Follower, rearRight.getDeviceID());

@@ -4,9 +4,11 @@ import org.usfirst.frc.team1922.robot.Robot;
 import org.usfirst.frc.team1922.robot.RobotMap;
 import org.usfirst.frc.team1922.robot.commands.DeployElevator_Command;
 import org.usfirst.frc.team1922.robot.commands.Deposit_Command;
+import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
 //import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToSwitch_Command;
+import org.usfirst.frc.team1922.robot.commands.TurnTo_Command;
 import org.usfirst.frc.team1922.robot.commands.Wait;
 import org.usfirst.frc.team1922.robot.commands.ZeroDrive_Command;
 
@@ -25,8 +27,15 @@ public class Center extends CommandGroup{
 		
 			addSequential( new ZeroDrive_Command());
 			addSequential( new Wait(.2));
-			addParallel( new DeployElevator_Command());
-			addSequential( new DriveTo_Command(-46.979, 9.6 - RobotMap.BotLength)); 
+			addParallel ( new DeployElevator_Command());
+			addSequential (new TurnTo_Command (-39.792));
+			//addSequential( new DriveTo_Command(-46.979, 9.6 - RobotMap.BotLength)); 
+		
+			addSequential( new Wait (.2));
+			addSequential( new ZeroDrive_Command());
+			addSequential( new Wait (.2));
+			addSequential( new DriveStraight_Command(13 - RobotMap.BotLength));
+			
 			
 			addSequential( new Wait(.2));
 		
@@ -48,8 +57,14 @@ public class Center extends CommandGroup{
 			addSequential( new ZeroDrive_Command());
 			addSequential( new Wait(.2));
 			addParallel( new DeployElevator_Command());
-			addSequential( new DriveTo_Command(26.562, 7.826  - RobotMap.BotLength));
+			
+			addSequential (new TurnTo_Command (19.877));
+			//addSequential( new DriveTo_Command(26.562, 7.826  - RobotMap.BotLength));
+			
 			addSequential( new Wait(.2));
+			addSequential( new ZeroDrive_Command());
+			addSequential( new Wait (.2));
+			addSequential( new DriveStraight_Command(11.70 - RobotMap.BotLength));
 			
 			addSequential( new ZeroDrive_Command());
 			addSequential( new Wait(.2));

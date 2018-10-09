@@ -4,6 +4,7 @@ import org.usfirst.frc.team1922.robot.Robot;
 import org.usfirst.frc.team1922.robot.RobotMap;
 import org.usfirst.frc.team1922.robot.commands.DeployElevator_Command;
 import org.usfirst.frc.team1922.robot.commands.Deposit_Command;
+import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToScale_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToSwitch_Command;
@@ -26,8 +27,8 @@ public class Left extends CommandGroup{
 			addParallel( new ElevateToSwitch_Command());
 			addSequential( new Wait(.5));
 			
-			
-			addSequential( new DriveTo_Command(0, 11 - RobotMap.BotLength)); 
+			addSequential (new DriveStraight_Command (13.75- (RobotMap.BotLength/2)));
+			//addSequential( new DriveTo_Command(0, 11 - RobotMap.BotLength)); 
 			addSequential( new Wait(.2));
 			
 			
@@ -48,7 +49,7 @@ public class Left extends CommandGroup{
 				addSequential( new Wait(.5));
 				
 				
-				addSequential( new DriveTo_Command(0, 27 - RobotMap.BotLength)); //22
+				addSequential( new DriveStraight_Command (27 - (RobotMap.BotLength/2))); //22
 				addSequential( new Wait(.2));
 				
 				
@@ -62,7 +63,7 @@ public class Left extends CommandGroup{
 		} 
 		else {
 			addParallel( new DeployElevator_Command());
-			addSequential( new DriveTo_Command(0, 11));
+			addSequential( new DriveStraight_Command(11));
 		}
 	}
 	

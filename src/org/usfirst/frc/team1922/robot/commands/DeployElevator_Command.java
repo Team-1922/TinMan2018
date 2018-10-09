@@ -14,6 +14,7 @@ public class DeployElevator_Command extends Command {
 	
 	@Override
 	protected void initialize() {
+		Robot.m_elevator.zeroEncoder();
 		Robot.m_elevator.set(.6);
 
 	}
