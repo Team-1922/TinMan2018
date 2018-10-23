@@ -28,10 +28,10 @@ public class TurnTo_Command extends Command{
     protected void initialize() {
         start = Robot.m_driveTrain.getAngle();
         if( direction >= 0 ){
-        	Robot.m_driveTrain.drive(.4,-.4);
+        	Robot.m_driveTrain.drive(.5,-.5);
         }else{ 
         	isLeft = true;
-        	Robot.m_driveTrain.drive(-.35,.35);
+        	Robot.m_driveTrain.drive(-.5,.5);
         	
         }
         SmartDashboard.putString("Turn Direction", "" + direction);
