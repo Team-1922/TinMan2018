@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1922.robot.commands;
 
 import org.usfirst.frc.team1922.robot.Robot;
-import org.usfirst.frc.team1922.robot.subsystems.Elevator_Subsystem;
+//import org.usfirst.frc.team1922.robot.subsystems.Elevator_Subsystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DeployElevator_Command extends Command {
@@ -14,6 +14,7 @@ public class DeployElevator_Command extends Command {
 	
 	@Override
 	protected void initialize() {
+		Robot.m_elevator.zeroEncoder();
 		Robot.m_elevator.set(.6);
 
 	}

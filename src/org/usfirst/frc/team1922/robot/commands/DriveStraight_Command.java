@@ -13,10 +13,10 @@ public class DriveStraight_Command extends Command{
 	//Unused, but unsure if I should comment out 
 	private double destination, start, heading;
 	
-	public DriveStraight_Command(int feet) {
+	public DriveStraight_Command(double d) {
 		super();
 		requires(Robot.m_driveTrain);
-		this.destination = feet;
+		this.destination = d;
 		this.heading = start;		
 	}
 	
@@ -34,7 +34,7 @@ public class DriveStraight_Command extends Command{
 	@Override 
 	protected void execute() {
 		error = heading -     Robot.m_driveTrain.getAngle();
-		Robot.m_driveTrain.drive(.5, .5);
+		Robot.m_driveTrain.drive(.4, .4);
 		//Robot.m_driveTrain.drive(.5 + kP*error , .5 - kP*error);
 		readValues();
 	}
