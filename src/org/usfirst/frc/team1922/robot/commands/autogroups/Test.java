@@ -18,6 +18,5 @@ public class Test extends CommandGroup{
 		addSequential (new DeployElevator_Command());
 		//addSequential (new TurnTo_Command(90));
 		//addSequential (new DriveStraight_Command(20));
-	
 	}
 }
