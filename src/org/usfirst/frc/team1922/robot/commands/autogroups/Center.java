@@ -34,7 +34,7 @@ public class Center extends CommandGroup{
 			addSequential( new ZeroDrive_Command());
 			addSequential (new Wait(.5));
 			
-			addSequential( new DriveStraight_Command(8.8 - RobotMap.BotLength));
+			addSequential( new DriveStraight_Command(10.0 - RobotMap.BotLength));
 			addSequential( new Wait(.2));
 			addSequential( new ZeroDrive_Command());
 			addSequential (new Wait(.5));
@@ -47,6 +47,7 @@ public class Center extends CommandGroup{
 			addSequential( new DriveStraight_Command(8.6 - RobotMap.BotLength));
 			addParallel(new ElevateToScale_Command());
 			addSequential( new Wait(.2));
+			
 			addSequential( new Deposit_Command());
 			
 			
