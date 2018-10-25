@@ -5,7 +5,6 @@ import org.usfirst.frc.team1922.robot.RobotMap;
 import org.usfirst.frc.team1922.robot.commands.DeployElevator_Command;
 import org.usfirst.frc.team1922.robot.commands.Deposit_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
-//import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToScale_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToSwitch_Command;
@@ -50,12 +49,6 @@ public class Center extends CommandGroup{
 			
 			addSequential( new Deposit_Command());
 			
-			
-			
-			
-			
-			
-			
 //			addSequential( new ZeroDrive_Command());
 //			addSequential (new Wait(.2));
 //			addSequential( new DriveStraight_Command(1)); 
@@ -91,7 +84,7 @@ public class Center extends CommandGroup{
 //			
 //			addSequential( new ZeroDrive_Command());
 //			addSequential( new Wait(.2));
-//			
+
 			addSequential( new DriveStraight_Command(7.67 - RobotMap.BotLength));
 			addParallel( new ElevateToSwitch_Command());
 			addSequential( new Wait(.2));
