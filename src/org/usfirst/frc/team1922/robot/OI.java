@@ -27,7 +27,6 @@ public class OI {
 	private Joystick m_leftStick;
 	private Joystick m_rightStick;
 	private XboxController m_operator;
-	//private Joystick m_operator;
 	private Button leftTrigger;
 //	private Button rightTrigger;
 	private Button operatorFirst;
@@ -44,7 +43,6 @@ public class OI {
 		m_leftStick = new Joystick(1); 
 		m_rightStick = new Joystick(0);
 		m_operator = new XboxController(2);
-		//m_operator = new Joystick(2); //Previously the third joystick used in 2017
 		leftTrigger = new JoystickButton(getLeftStick(), 1); 
 //		rightTrigger = new JoystickButton(getRightStick(), 1); 
 		operatorFirst = new JoystickButton(getOperator(), 1); 

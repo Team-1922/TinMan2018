@@ -5,7 +5,7 @@ import org.usfirst.frc.team1922.robot.RobotMap;
 import org.usfirst.frc.team1922.robot.commands.DeployElevator_Command;
 import org.usfirst.frc.team1922.robot.commands.Deposit_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
-import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
+//import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToScale_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToSwitch_Command;
 import org.usfirst.frc.team1922.robot.commands.TurnTo_Command;
