@@ -7,15 +7,19 @@
 
 package org.usfirst.frc.team1922.robot;
 
-import org.usfirst.frc.team1922.robot.commands.*;
 //import org.usfirst.frc.team1922.robot.extras.LimitSwitch;
+import org.usfirst.frc.team1922.robot.commands.DeployElevator_Command;
+import org.usfirst.frc.team1922.robot.commands.Deposit_Command;
+import org.usfirst.frc.team1922.robot.commands.ElevateToScale_Command;
+import org.usfirst.frc.team1922.robot.commands.ElevatorDown_Command;
+import org.usfirst.frc.team1922.robot.commands.ElevatorUp_Command;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.XboxController; 
+import edu.wpi.first.wpilibj.buttons.JoystickButton; 
 
 
 /**

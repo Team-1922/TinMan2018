@@ -5,9 +5,9 @@ import org.usfirst.frc.team1922.robot.commands.OperateIntake_Command;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.XboxController; 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard; 
 
 public class Intake_Subsystem extends Subsystem{
 

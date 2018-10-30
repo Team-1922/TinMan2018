@@ -7,15 +7,22 @@
 
 package org.usfirst.frc.team1922.robot;
 
+import org.usfirst.frc.team1922.robot.commands.autogroups.Center;
+import org.usfirst.frc.team1922.robot.commands.autogroups.CrossAutoLine;
+import org.usfirst.frc.team1922.robot.commands.autogroups.Left;
+import org.usfirst.frc.team1922.robot.commands.autogroups.Right;
+import org.usfirst.frc.team1922.robot.commands.autogroups.Test;
+import org.usfirst.frc.team1922.robot.subsystems.DriveTrain_Subsystem;
+import org.usfirst.frc.team1922.robot.subsystems.Elevator_Subsystem;
+import org.usfirst.frc.team1922.robot.subsystems.Intake_Subsystem;
+
 //import edu.wpi.first.wpilibj.CameraServer; //Used for drive camera
-import edu.wpi.first.wpilibj.DriverStation; 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team1922.robot.commands.autogroups.*;
-import org.usfirst.frc.team1922.robot.subsystems.*;
 
 public class Robot extends TimedRobot {
 	public static DriveTrain_Subsystem m_driveTrain; 

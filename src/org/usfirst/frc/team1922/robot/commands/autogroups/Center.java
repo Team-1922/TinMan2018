@@ -6,7 +6,6 @@ import org.usfirst.frc.team1922.robot.commands.DeployElevator_Command;
 import org.usfirst.frc.team1922.robot.commands.Deposit_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
 import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
-import org.usfirst.frc.team1922.robot.commands.ElevateToScale_Command;
 import org.usfirst.frc.team1922.robot.commands.ElevateToSwitch_Command;
 import org.usfirst.frc.team1922.robot.commands.TurnTo_Command;
 import org.usfirst.frc.team1922.robot.commands.Wait;
@@ -44,7 +43,7 @@ public class Center extends CommandGroup{
 			addSequential (new Wait(.5));
 			
 			addSequential( new DriveStraight_Command(8.6 - RobotMap.BotLength));
-			addParallel(new ElevateToScale_Command());
+			addParallel(new ElevateToSwitch_Command());
 			addSequential( new Wait(.2));
 			
 			addSequential( new Deposit_Command());
