@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1922.robot.commands.autogroups;
 
 import org.usfirst.frc.team1922.robot.commands.DeployElevator_Command;
-import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
+import org.usfirst.frc.team1922.robot.commands.DriveStraight_Command;
+//import org.usfirst.frc.team1922.robot.commands.DriveTo_Command;
 import org.usfirst.frc.team1922.robot.commands.Wait;
 import org.usfirst.frc.team1922.robot.commands.ZeroDrive_Command;
 
@@ -13,7 +14,6 @@ public class CrossAutoLine extends CommandGroup{
 		addSequential( new ZeroDrive_Command());
 		addSequential( new Wait(.25));
 		addParallel( new DeployElevator_Command());
-		addSequential( new DriveTo_Command(0, 11));
-		//addSequential( new DriveStraight_Command(6));
+		addSequential( new DriveStraight_Command(11));
 	}
 }
