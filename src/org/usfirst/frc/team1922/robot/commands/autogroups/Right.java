@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Right extends CommandGroup{
 	
 	public Right() {
+		
 		if(Robot.getPositions().substring(0,1).equals("R")) {
 			
 			addSequential( new ZeroDrive_Command());

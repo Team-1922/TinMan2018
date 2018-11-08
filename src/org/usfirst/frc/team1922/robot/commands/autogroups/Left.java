@@ -25,14 +25,13 @@ public class Left extends CommandGroup{
 			addParallel( new ElevateToSwitch_Command());
 			addSequential( new Wait(.5)); 
 			
-			addSequential (new DriveStraight_Command (13.75- (RobotMap.BotLength/2)));
+			addSequential( new DriveStraight_Command(13.75 - (RobotMap.BotLength/2)));
 			//addSequential( new DriveTo_Command(0, 11 - RobotMap.BotLength)); 
 			addSequential( new Wait(.2));
 			
-			
 			addSequential( new ZeroDrive_Command());
 			addSequential( new Wait(.5));
-			addSequential(new TurnTo_Command(90));
+			addSequential( new TurnTo_Command(90));
 			
 			addSequential( new Wait(.2));
 			
